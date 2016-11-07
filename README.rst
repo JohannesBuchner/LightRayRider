@@ -80,6 +80,7 @@ License and Acknowledgements
 
 If you use this code, please cite "Galaxy gas as obscurer: II. Separating the galaxy-scale and
 nuclear obscurers of Active Galactic Nuclei", by Buchner & Bauer (2016, submitted).
+https://arxiv.org/abs/1610.09380
 
 I will put a bibcode here as soon as the paper is published.
 
