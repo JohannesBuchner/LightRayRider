@@ -113,7 +113,7 @@ int sphere_raytrace(
 						highr = mindistance;
 					double length = highr - lowr;
 					double NHadd = length * rho;
-					fprintf(stderr, "   NH contribution: %e %f %f %f\n", rho, length, lowr, highr);
+					IFDEBUG fprintf(stderr, "   NH contribution: %e %f %f %f\n", rho, length, lowr, highr);
 					NHtotal[k] += NHadd;
 				}
 			}
