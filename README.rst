@@ -82,7 +82,22 @@ If you use this code, please cite "Galaxy gas as obscurer: II. Separating the ga
 nuclear obscurers of Active Galactic Nuclei", by Buchner & Bauer (2016, submitted).
 https://arxiv.org/abs/1610.09380
 
-I will put a bibcode here as soon as the paper is published.
+Bibcode::
+	
+	@ARTICLE{2016arXiv161009380B,
+	   author = {{Buchner}, J. and {Bauer}, F.~E.},
+	    title = "{Galaxy gas as obscurer: II. Separating the galaxy-scale and nuclear obscurers of Active Galactic Nuclei}",
+	  journal = {ArXiv e-prints},
+	archivePrefix = "arXiv",
+	   eprint = {1610.09380},
+	 primaryClass = "astro-ph.HE",
+	 keywords = {Astrophysics - High Energy Astrophysical Phenomena, Astrophysics - Astrophysics of Galaxies},
+	     year = 2016,
+	    month = oct,
+	   adsurl = {http://adsabs.harvard.edu/abs/2016arXiv161009380B},
+	  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+	}
+
 
 The code is licensed under AGPLv3 (see LICENSE file).
 
