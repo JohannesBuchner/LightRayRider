@@ -50,6 +50,26 @@ Method:
 * Segmentation of the line where points become equi-distant. 
   Performs approximately linearly with number of points.
 
+Grid cutting
+----------------------
+
+Input:
+
+* 3D Grid with densities at each location
+* One or more arbitrary lines from a point
+
+Output:
+
+* This computes the total length along the line,
+  where every point on the line is assigned the density from the 
+  grid cell it passes through.
+* From distance 0 or another chosen minimal distance (or multiple).
+
+Method:
+
+* Finding intersections of the cell borders (planes) with the lines, and
+  checking which cell to consider next.
+
 Usage
 --------------
 
@@ -59,14 +79,15 @@ Compile the c library first with::
 
 To use from Python, use raytrace.py::
 	
-	from raytrace import voronoi_raytrace, sphere_raytrace
+	from raytrace import *
 
 You can find the declaration of how to call these functions in raytrace.py.
 Basically, you pass the coordinates of your gas particles, the associated
 densities and the starting point and direction of your raytracing.
 
 Example usage is demonstrated in irradiate.py. This was used for Illustris and 
-EAGLE particle in the associated paper.
+EAGLE particle in the associated paper. 
+There are additional unit test examples in test/.
 
 Parallel processing
 -----------------------
