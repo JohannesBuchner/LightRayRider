@@ -52,6 +52,6 @@ script:
   - OMP_NUM_THREADS=4 coverage run setup.py test
 
 after_success: 
-  - coveralls-cpp
   - coveralls-py
+  - coveralls-cpp
 
