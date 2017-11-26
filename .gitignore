@@ -3,4 +3,4 @@
 *.png
 *.so
 *.npz
-*.txt
+#*.txt
