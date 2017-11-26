@@ -2,7 +2,8 @@ from __future__ import print_function, division
 import numpy
 import raytrace
 
-def to_cartesian((rad, theta, phi)):
+def to_cartesian(pos):
+	(rad, theta, phi) = pos
 	sin, cos = numpy.sin, numpy.cos
 	xv = rad * sin(theta) * cos(phi)
 	yv = rad * sin(theta) * sin(phi)

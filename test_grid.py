@@ -2,7 +2,8 @@ from __future__ import print_function, division
 import numpy
 from math import floor, ceil
 from raytrace import grid_raytrace_finite
-def raytrace_grid_finite((x0, y0, z0), (dx, dy, dz), d):
+def raytrace_grid_finite(x, v, d):
+	(x0, y0, z0), (dx, dy, dz) = x, v
 	# call raytrace_grid_finite_c()
 	rho = numpy.ones((256, 256, 256))
 	x, y, z = numpy.array([x0*1. + 128]), numpy.array([y0*1.+128]), numpy.array([z0*1.+128])
