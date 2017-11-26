@@ -338,7 +338,7 @@ def test_inhomogeneous():
 	# call raytrace_grid_finite_c()
 	NHmax = 4.99 + numpy.zeros((N))
 	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
-	print 'distance:', t
+	print('distance:', t)
 	assert numpy.allclose(t, 0.499), t
 	
 	# go one further
@@ -346,7 +346,7 @@ def test_inhomogeneous():
 	rho[128,128,128] = 10
 	NHmax = 5.99 + numpy.zeros((N))
 	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
-	print 'distance:', t
+	print('distance:', t)
 	assert (t <= 1.499).all(), t
 	assert (t >= 0.599).all(), t
 	
@@ -357,7 +357,7 @@ def test_inhomogeneous():
 	NHmax = (10 + 1 + 1) * 3**0.5 + numpy.zeros((N))
 	#NHmax = 400 + numpy.zeros((20))
 	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
-	print 'distance:', t
+	print('distance:', t)
 	assert (t == -1).all(), t
 	
 
