@@ -50,6 +50,26 @@ Method:
 * Segmentation of the line where points become equi-distant. 
   Performs approximately linearly with number of points.
 
+Grid cutting
+----------------------
+
+Input:
+
+* 3D Grid with densities at each location
+* One or more arbitrary lines from a point
+
+Output:
+
+* This computes the total length along the line,
+  where every point on the line is assigned the density from the 
+  grid cell it passes through.
+* From distance 0 or another chosen minimal distance (or multiple).
+
+Method:
+
+* Finding intersections of the cell borders (planes) with the lines, and
+  checking which cell to consider next.
+
 Usage
 --------------
 
@@ -59,14 +79,15 @@ Compile the c library first with::
 
 To use from Python, use raytrace.py::
 	
-	from raytrace import voronoi_raytrace, sphere_raytrace
+	from raytrace import *
 
 You can find the declaration of how to call these functions in raytrace.py.
 Basically, you pass the coordinates of your gas particles, the associated
 densities and the starting point and direction of your raytracing.
 
 Example usage is demonstrated in irradiate.py. This was used for Illustris and 
-EAGLE particle in the associated paper.
+EAGLE particle in the associated paper. 
+There are additional unit test examples in test/.
 
 Parallel processing
 -----------------------
@@ -79,25 +100,26 @@ License and Acknowledgements
 --------------------------------
 
 If you use this code, please cite "Galaxy gas as obscurer: II. Separating the galaxy-scale and
-nuclear obscurers of Active Galactic Nuclei", by Buchner & Bauer (2016, submitted).
-https://arxiv.org/abs/1610.09380
+nuclear obscurers of Active Galactic Nuclei", by Buchner & Bauer (2017), https://arxiv.org/abs/1610.09380
 
 Bibcode::
-	
-	@ARTICLE{2016arXiv161009380B,
+
+	@ARTICLE{2017MNRAS.465.4348B,
 	   author = {{Buchner}, J. and {Bauer}, F.~E.},
-	    title = "{Galaxy gas as obscurer: II. Separating the galaxy-scale and nuclear obscurers of Active Galactic Nuclei}",
-	  journal = {ArXiv e-prints},
+	    title = "{Galaxy gas as obscurer - II. Separating the galaxy-scale and nuclear obscurers of active galactic nuclei}",
+	  journal = {\mnras},
 	archivePrefix = "arXiv",
 	   eprint = {1610.09380},
 	 primaryClass = "astro-ph.HE",
-	 keywords = {Astrophysics - High Energy Astrophysical Phenomena, Astrophysics - Astrophysics of Galaxies},
-	     year = 2016,
-	    month = oct,
-	   adsurl = {http://adsabs.harvard.edu/abs/2016arXiv161009380B},
+	 keywords = {dust, extinction, ISM: general, galaxies: active, galaxies: general, galaxies: ISM, X-rays: ISM},
+	     year = 2017,
+	    month = mar,
+	   volume = 465,
+	    pages = {4348-4362},
+	      doi = {10.1093/mnras/stw2955},
+	   adsurl = {http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B},
 	  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 	}
-
 
 The code is licensed under AGPLv3 (see LICENSE file).
 
