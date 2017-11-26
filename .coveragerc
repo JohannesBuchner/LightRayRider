@@ -15,6 +15,7 @@ exclude_lines =
     if __name__ == .__main__.
 omit =
     .eggs/*
+    /home/travis/.local/lib/*
     test*.py
     setup.py
     
