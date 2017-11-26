@@ -9,7 +9,7 @@ def montecarlo(x, y, z, R, rho, a, b, c, mindistances):
 	r = (x**2 + y**2 + z**2)**0.5
 	rmax = r.max()
 	interpolator = scipy.interpolate.NearestNDInterpolator(numpy.transpose([x, y, z]), rho)
-	N = 100000
+	N = 400000
 	t = numpy.logspace(-3, numpy.log10(rmax), N)
 	#t = numpy.linspace(0, r.min(), N)
 	#t = numpy.hstack((numpy.linspace(0, r.min(), 10)[:-1], numpy.logspace(numpy.log10(r.min()), numpy.log10(rmax), N/40)))
@@ -34,35 +34,35 @@ def test():
 	z = data['z']
 	R = data['R']
 	rho = data['conversion'][:,0]
-	
-	i = numpy.random.randint(len(data['v']))
-	vall = data['v'][i:i+1,:]
-	
-	a, b, c = numpy.copy(vall[:,0]), numpy.copy(vall[:,1]), numpy.copy(vall[:,2])
 	mindistances = numpy.copy(data['mindistances'][:1])
 	print('densities:', rho)
-	print('MONTE CARLO:')
-	result = montecarlo(x, y, z, R, rho, a, b, c, mindistances)
-	print(result)
 	
-	#print('SEGMENTATION:')
-	#points = numpy.transpose([x, y, z])
-	#segments = line.segment(vall[0,:], points)
-	#for xlo, xhi, i in segments:
-	#	print(xlo, xhi, rho[i])
-	#return result
+	for i in range(3):
+		vall = data['v'][i:i+1,:]
+		a, b, c = numpy.copy(vall[:,0]), numpy.copy(vall[:,1]), numpy.copy(vall[:,2])
+		
+		print('MONTE CARLO:', i)
+		result = montecarlo(x, y, z, R, rho, a, b, c, mindistances)
+		print(result)
 	
-	for i in range(1):
-		print('running...')
-		result2 = voronoi_raytrace(x, y, z, R, rho, a, b, c, mindistances).flatten()
-	print('done.')
-	print(result)
-	assert result.shape == result2.shape, (result.shape, result2.shape)
-	print('result:', numpy.log10(result))
-	print('reference:', numpy.log10(result2))
-	print('absdiff:', numpy.max(numpy.abs(result - result2)))
-	print('reldiff:', numpy.max(numpy.abs((result - result2)/result2)))
-	assert numpy.allclose(result, result2, rtol=0.5, atol=1e20)
+		#print('SEGMENTATION:')
+		#points = numpy.transpose([x, y, z])
+		#segments = line.segment(vall[0,:], points)
+		#for xlo, xhi, i in segments:
+		#	print(xlo, xhi, rho[i])
+		#return result
+	
+		for i in range(1):
+			print('running...', i)
+			result2 = voronoi_raytrace(x, y, z, R, rho, a, b, c, mindistances).flatten()
+		print('done.')
+		print(result)
+		assert result.shape == result2.shape, (result.shape, result2.shape)
+		print('result:', numpy.log10(result))
+		print('reference:', numpy.log10(result2))
+		print('absdiff:', numpy.max(numpy.abs(result - result2)))
+		print('reldiff:', numpy.max(numpy.abs((result - result2)/result2)))
+		assert numpy.allclose(result, result2, rtol=0.5, atol=1e20)
 	
 
 if __name__ == '__main__':
