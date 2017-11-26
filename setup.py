@@ -24,6 +24,6 @@ setup(
         "numpy",
         "scipy",       # for phash
     ],
-    tests_require=['nose'],
-    test_suite='nose.collector',
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
 )
