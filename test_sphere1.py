@@ -1,4 +1,6 @@
 import numpy
+from ctypes import *
+from numpy.ctypeslib import ndpointer
 from raytrace import sphere_raytrace
 
 def rootterm(a, b, c, x, y, z, R):
@@ -82,31 +84,26 @@ def nh_dist(x, y, z, R, density, mindistances=[0], ):
 
 
 def test():
-	data_orig = numpy.load('ray_example.npz')
-	data = dict([(k, data_orig[k].astype(numpy.float64)) for k in data_orig.keys()])
-	x = data['x']
-	y = data['y']
-	z = data['z']
-	R = data['R']
-	rho = data['conversion'][:,0]
+	numpy.random.seed(1)
+	N = 10000
+	x = numpy.random.normal(size=N)
+	y = numpy.random.normal(size=N)
+	z = numpy.random.normal(size=N)
+	RR = numpy.random.normal(1, 0.1, size=N)
+	rho = 10**numpy.random.normal(20, 0.1, size=N)
 	
-	vall = data['v'][:1,:]
+	nsamples = 40
+	vall = numpy.random.normal(size=(nsamples, 3))
+	vall /= ((vall**2).sum(axis=1)**0.5).reshape((-1, 1)) # normalize
 	
 	a, b, c = numpy.copy(vall[:,0]), numpy.copy(vall[:,1]), numpy.copy(vall[:,2])
-	mindistances = numpy.copy(data['mindistances'][:1])
+	mindistances = numpy.array([0.0]) #, 0.1, 1])
 	
-	for i in range(1):
+	for i in range(10):
 		print 'running...'
-		result = sphere_raytrace(x, y, z, R, rho, a, b, c, mindistances)
+		result = sphere_raytrace(x, y, z, RR, rho, a, b, c, mindistances)
 	print 'done.'
 	print result
-	assert result.shape == data['NHtotal'].shape, (result.shape, data['NHtotal'].shape)
-	print 'result:', numpy.log10(result)
-	print 'reference:', numpy.log10(data['NHtotal'])
-	print 'absdiff:', numpy.max(numpy.abs(result - data['NHtotal']))
-	print 'reldiff:', numpy.max(numpy.abs((result - data['NHtotal'])/data['NHtotal']))
-	assert numpy.allclose(result, data['NHtotal'], rtol=0.0001, atol=1e19)
-	
 
 if __name__ == '__main__':
 	test()

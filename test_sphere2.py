@@ -1,63 +1,5 @@
 import numpy
-from ctypes import *
-from numpy.ctypeslib import ndpointer
-
-lib = cdll.LoadLibrary('ray.so')
-lib.sphere_raytrace.argtypes = [
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	c_int, 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	c_int, 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	c_int, 
-	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
-	]
-
-def sphere_raytrace(xx, yy, zz, RR, rho, a, b, c, mindistances):
-	"""
-	Main ray tracing function.
-	
-	Parameters regarding where to interpolate:
-	xx:     double array: coordinates
-	yy:     double array: coordinates
-	zz:     double array: coordinates
-	RR:     double array: sphere radius
-	rho:    double array: density for conversion from length to column density
-	 * n:      length of xx, yy, zz, RR
-	a:      double array: direction vector
-	b:      double array: direction vector
-	c:      double array: direction vector
-	 * m:      length of a, b, c
-	mindistances double array: only consider intersections beyond these values
-	 * int l   length of mindistances
-	NHout   double array: output; of size n * l
-	
-	:param: left:  Lower bin border (numpy array)
-	:param: right: Upper bin border (numpy array, same length as left)
-	:param: x:     Coordinates where data values are defined (numpy array)
-	:param: y:     Data values at those coordinates (numpy array, same 
-	               length as x)
-	:return: numpy array (of the same length as left/right) containing the
-	   integration within the bins.	
-	
-	left and right each have to be monotonically increasing (and right > left).
-	Numpy arrays have to be float64 and contiguous (i.e. fancy indexing can not be used
-	directly, a copy is necessary.).
-	
-	This function is most useful for Sherpa models.
-	"""
-	
-	NHout = numpy.zeros(shape=(len(a)*len(mindistances))) - 1
-	r = lib.sphere_raytrace(xx, yy, zz, RR, rho, len(xx), a, b, c, len(a), mindistances, len(mindistances), NHout)
-	if r != 0:
-		raise Exception("Interpolation failed")
-	return NHout
+from raytrace import sphere_raytrace
 
 def rootterm(a, b, c, x, y, z, R):
 	return (R**2*a**2 + R**2*b**2 + R**2*c**2 - a**2*y**2 - a**2*z**2 + 2*a*b*x*y + 2*a*c*x*z - b**2*x**2 - b**2*z**2 + 2*b*c*y*z - c**2*x**2 - c**2*y**2)
@@ -140,26 +82,31 @@ def nh_dist(x, y, z, R, density, mindistances=[0], ):
 
 
 def test():
-	numpy.random.seed(1)
-	N = 10000
-	x = numpy.random.normal(size=N)
-	y = numpy.random.normal(size=N)
-	z = numpy.random.normal(size=N)
-	RR = numpy.random.normal(1, 0.1, size=N)
-	rho = 10**numpy.random.normal(20, 0.1, size=N)
+	data_orig = numpy.load('ray_example.npz')
+	data = dict([(k, data_orig[k].astype(numpy.float64)) for k in data_orig.keys()])
+	x = data['x']
+	y = data['y']
+	z = data['z']
+	R = data['R']
+	rho = data['conversion'][:,0]
 	
-	nsamples = 40
-	vall = numpy.random.normal(size=(nsamples, 3))
-	vall /= ((vall**2).sum(axis=1)**0.5).reshape((-1, 1)) # normalize
+	vall = data['v'] #[:1,:]
 	
 	a, b, c = numpy.copy(vall[:,0]), numpy.copy(vall[:,1]), numpy.copy(vall[:,2])
-	mindistances = numpy.array([0.0]) #, 0.1, 1])
+	mindistances = numpy.copy(data['mindistances'])
 	
-	for i in range(10):
+	for i in range(1):
 		print 'running...'
-		result = sphere_raytrace(x, y, z, RR, rho, a, b, c, mindistances)
+		result = sphere_raytrace(x, y, z, R, rho, a, b, c, mindistances)
 	print 'done.'
 	print result
+	assert result.shape == data['NHtotal'].shape, (result.shape, data['NHtotal'].shape)
+	print 'result:', numpy.log10(result)
+	print 'reference:', numpy.log10(data['NHtotal'])
+	print 'absdiff:', numpy.max(numpy.abs(result - data['NHtotal']))
+	print 'reldiff:', numpy.max(numpy.abs((result - data['NHtotal'])/data['NHtotal']))
+	assert numpy.allclose(result, data['NHtotal'], rtol=0.0001, atol=1e19)
+	
 
 if __name__ == '__main__':
 	test()
