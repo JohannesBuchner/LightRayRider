@@ -6,6 +6,7 @@ License: AGPLv3
 
 See README and LICENSE file.
 """
+from __future__ import print_function, division
 import numpy
 from ctypes import *
 from numpy.ctypeslib import ndpointer
@@ -13,20 +14,20 @@ import os
 
 if int(os.environ.get('OMP_NUM_THREADS', '1')) > 1:
 	lib = cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), './ray-parallel.so'))
-	print """
-	You are using the LightRayRider library, which provides optimized calls for
-	photon propagation and column density computations.
-	Please cite: Buchner & Bauer (2017), http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B
-	Parallelisation enabled.
-	"""
+	print("""
+  You are using the LightRayRider library, which provides optimized calls for
+  photon propagation and column density computations.
+  Please cite: Buchner & Bauer (2017), http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B
+  Parallelisation enabled.
+  """)
 else:
 	lib = cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), './ray.so'))
-	print """
-	You are using the LightRayRider library, which provides optimized calls for
-	photon propagation and column density computations.
-	Please cite: Buchner & Bauer (2017), http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B
-	Parallelisation disabled (use OMP_NUM_THREADS to enable).
-	"""
+	print("""
+  You are using the LightRayRider library, which provides optimized calls for
+  photon propagation and column density computations.
+  Please cite: Buchner & Bauer (2017), http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B
+  Parallelisation disabled (use OMP_NUM_THREADS to enable).
+  """)
 
 
 

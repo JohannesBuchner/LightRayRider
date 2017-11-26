@@ -1,3 +1,4 @@
+from __future__ import print_function, division
 import numpy
 from ctypes import *
 from numpy.ctypeslib import ndpointer
@@ -18,7 +19,7 @@ def sample_nh(xx, yy, zz, RR, v, mindistances, conversion):
 	c = v[:,2].reshape((1, -1))
 	root = rootterm(a, b, c, xx, yy, zz, RR)
 	mask = root >= 0
-	print 'collisions: %.2f' % (mask.sum(axis=0) * 1.).mean()
+	print('collisions: %.2f' % (mask.sum(axis=0) * 1.).mean())
 	sys.stdout.flush()
 	sola = cross_pos(a, b, c, xx, yy, zz, RR, root)
 	solb = cross_neg(a, b, c, xx, yy, zz, RR, root)
@@ -77,8 +78,8 @@ def nh_dist(x, y, z, R, density, mindistances=[0], ):
 	for i in range(len(mindistances)):
 		NHtotal = numpy.array(seqs[i])
 		assert NHtotal.shape == (nsamples,), NHtotal.shape
-		print '** NH=%.1f obscfrac=%.1f%% CTfrac=%.1f%%' % (numpy.log10(NHtotal).mean(), 
-			100 * (NHtotal>1e22).mean(), 100 * (NHtotal>1e24).mean())
+		print('** NH=%.1f obscfrac=%.1f%% CTfrac=%.1f%%' % (numpy.log10(NHtotal).mean(), 
+			100 * (NHtotal>1e22).mean(), 100 * (NHtotal>1e24).mean()))
 	NHtotal = numpy.array(seqs)
 	return NHtotal
 
@@ -100,10 +101,10 @@ def test():
 	mindistances = numpy.array([0.0]) #, 0.1, 1])
 	
 	for i in range(10):
-		print 'running...'
+		print('running...')
 		result = sphere_raytrace(x, y, z, RR, rho, a, b, c, mindistances)
-	print 'done.'
-	print result
+	print('done.')
+	print(result)
 
 if __name__ == '__main__':
 	test()

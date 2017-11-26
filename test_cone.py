@@ -1,3 +1,4 @@
+from __future__ import print_function, division
 import numpy
 from numpy import pi, sin, cos, arccos, tan
 import raytrace
@@ -9,7 +10,8 @@ def cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d):
 	y += b*t
 	z += c*t
 
-def to_spherical((xf, yf, zf)):
+def to_spherical(pos):
+	(xf, yf, zf) = pos
 	xf = numpy.asarray(xf).reshape((-1,))
 	yf = numpy.asarray(yf).reshape((-1,))
 	zf = numpy.asarray(zf).reshape((-1,))
@@ -19,7 +21,8 @@ def to_spherical((xf, yf, zf)):
 	theta = numpy.where(rad == 0, 0., arccos(zf / rad))
 	return (rad, theta, phi)
 
-def to_cartesian((rad, theta, phi)):
+def to_cartesian(pos):
+	(rad, theta, phi) = pos
 	xv = rad * sin(theta) * cos(phi)
 	yv = rad * sin(theta) * sin(phi)
 	zv = rad * cos(theta)
@@ -53,7 +56,7 @@ def test_central_single():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = (x**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert r[0] > 10, r[0]
 	assert r[1] > 10, r[1]
 	assert r[2] < 1,  r[2]
@@ -69,7 +72,7 @@ def test_central_single():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = (x**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert numpy.isclose(r[0], 0.5),  r[0]
 	assert numpy.isclose(r[1], 0.5),  r[1]
 	assert r[2] > 10, r[2]
@@ -84,7 +87,7 @@ def test_central_single():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = (x**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert numpy.isclose(r[0], 0.1),  r[0]
 	assert numpy.isclose(r[1], 0.9),  r[1]
 	assert r[2] > 10, r[2]
@@ -103,7 +106,7 @@ def test_border_single():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = ((x-x0)**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert numpy.isclose(r[0], 0.1),  r[0]
 	assert r[1] > 10, r[1]
 	assert r[2] > 10, r[2]
@@ -122,7 +125,7 @@ def test_crossing_single_center():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = ((x-x0)**2 + (y - y0)**2 + (z-z0)**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert numpy.isclose(r[0], 1),  r[0]
 	assert r[1] > 10, r[1]
 	assert r[2] > 10, r[2]
@@ -141,7 +144,7 @@ def test_crossing_single_border():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = ((x-x0)**2 + (y - y0)**2 + (z-z0)**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert numpy.isclose(r[0], 0.958932),  r[0]
 	assert r[1] > 10, r[1]
 	assert r[2] > 10, r[2]
@@ -159,7 +162,7 @@ def test_noncentral_single():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = ((x - 0.001)**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert r[0] > 10, r[0]
 	assert r[1] > 10, r[1]
 	assert r[2] < 1,  r[2]
@@ -177,7 +180,7 @@ def test_single_horizontal():
 	c = numpy.zeros(3)
 	d = numpy.array([0.001, 1., 1.9])
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
-	print x, y, z
+	print(x, y, z)
 	xexp = [-1 + 0.001, 0.001*2, 1+0.001*2-0.1]
 	assert numpy.allclose(x, xexp, atol=0.001), (x, xexp, x-xexp)
 	assert numpy.allclose(y, [0, 0, 0]), y
@@ -196,7 +199,7 @@ def test_central_multiple():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = (x**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert r[0] > 10, r[0]
 	assert r[1] < 1, r[1]
 	assert numpy.isclose(r[1], 0.5),  r[2]
@@ -213,7 +216,7 @@ def test_central_multiple():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = (x**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert numpy.isclose(r[0], 0.25),  r[0]
 	assert numpy.isclose(r[1], 0.5),  r[1]
 	assert r[2] > 10, r[2]
@@ -228,7 +231,7 @@ def test_central_multiple():
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
 	# now x, y, z should be updated
 	r = (x**2 + y**2 + z**2)**0.5
-	print r, x, y, z
+	print(r, x, y, z)
 	assert numpy.isclose(r[0], 0.1),  r[0]
 	assert numpy.isclose(r[1], 0.9),  r[1]
 	assert r[2] > 10, r[2]
@@ -245,7 +248,7 @@ def test_speed_central_multiple():
 	a, b, c = to_cartesian((1, beta, phi))
 	d = 10**numpy.random.uniform(-2, 1, size=N) + 0.001
 	cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d)
-	print x, y, z
+	print(x, y, z)
 	assert not (x == 0).any()
 	assert not (y == 0).any()
 	assert not (z == 0).any()
