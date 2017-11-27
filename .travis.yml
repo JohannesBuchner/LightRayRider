@@ -38,6 +38,7 @@ install:
   - mv ${HOME}/.local/bin/coveralls ${HOME}/.local/bin/coveralls-py
   - pip install --user cpp-coveralls
   - mv ${HOME}/.local/bin/coveralls ${HOME}/.local/bin/coveralls-cpp
+  - pip install --user codecov
 
   # Summerise environment
   # ---------------------
@@ -52,6 +53,9 @@ script:
   - OMP_NUM_THREADS=4 coverage run setup.py test
 
 after_success: 
+  - codecov
+  - gcov ray.c
+  - bash <(curl -s https://codecov.io/bash)
   - coveralls-py
-  - coveralls-cpp
+
 
