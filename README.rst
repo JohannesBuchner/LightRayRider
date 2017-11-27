@@ -11,6 +11,11 @@ For hydrodynamic simulations which produce such a gas distribution, this code ca
 the total density along a arbitrary ray. The output is a column density, 
 also known as N_H if hydrogen gas is irradiated.
 
+.. image:: https://coveralls.io/repos/github/JohannesBuchner/LightRayRider/badge.svg?branch=master
+	:target: https://coveralls.io/github/JohannesBuchner/LightRayRider?branch=master
+.. image:: https://travis-ci.org/JohannesBuchner/LightRayRider.svg?branch=master
+	:target: https://travis-ci.org/JohannesBuchner/LightRayRider
+
 Line/Sphere cutting
 --------------------
 
