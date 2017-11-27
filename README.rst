@@ -6,15 +6,22 @@ A fast library for calculating intersections of a line with many spheres or inho
 Introduction
 -------------
 
+.. image:: logo.png
+
+Technically speaking, the library performs three-dimensional line integrals 
+through various geometric bodies, such as millions of spheres of various sizes, 
+three-dimensional uniform grids, and arbitrary density fields approximated by their 
+point densities and voronoi tesselation.
+
 In astrophysics, a point source can be obscured by a gas distribution along the line-of-sight.
 For hydrodynamic simulations which produce such a gas distribution, this code can compute
 the total density along a arbitrary ray. The output is a column density, 
 also known as N_H if hydrogen gas is irradiated.
 
-.. image:: https://coveralls.io/repos/github/JohannesBuchner/LightRayRider/badge.svg?branch=master
-	:target: https://coveralls.io/github/JohannesBuchner/LightRayRider?branch=master
 .. image:: https://travis-ci.org/JohannesBuchner/LightRayRider.svg?branch=master
 	:target: https://travis-ci.org/JohannesBuchner/LightRayRider
+.. image:: https://coveralls.io/repos/github/JohannesBuchner/LightRayRider/badge.svg?branch=master
+	:target: https://coveralls.io/github/JohannesBuchner/LightRayRider?branch=master
 
 Line/Sphere cutting
 --------------------
