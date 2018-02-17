@@ -9,7 +9,7 @@ def raytrace_grid_finite(x, v, d):
 	x, y, z = numpy.array([x0*1. + 128]), numpy.array([y0*1.+128]), numpy.array([z0*1.+128])
 	a, b, c = numpy.array([dx*1.]), numpy.array([dy*1.]), numpy.array([dz*1.])
 	NHmax = numpy.array([d*1.])
-	r = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	r = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	t = r[0]
 	print('distance:', t, (x, y, z), NHmax)
 	return x0 + dx * t, y0 + dy * t, z0 + dz * t
@@ -232,7 +232,7 @@ def test_random_single():
 	print('direction:', a**2 + b**2 + c**2)
 	NHmax = numpy.array([63.1791943441])
 	rho = numpy.ones((256, 256, 256))
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	print('distance:', t)
 	assert (t > 0).all(), t
 	assert numpy.isclose(t, NHmax), (t, NHmax)
@@ -246,11 +246,11 @@ def test_single_small1d_pos():
 	print('direction:', a**2 + b**2 + c**2)
 	NHmax = numpy.array([1000.])
 	rho = numpy.ones((256, 256, 256))
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	print('distance:', t)
 	assert t == -1, t
 	NHmax = numpy.array([10.])
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	assert (t > 0).all(), t
 	assert numpy.isclose(t, NHmax), (t, NHmax)
 	
@@ -260,11 +260,11 @@ def test_single_small1d_neg():
 	print('direction:', a**2 + b**2 + c**2)
 	NHmax = numpy.array([1000.])
 	rho = numpy.ones((256, 256, 256))
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	print('distance:', t)
 	assert t == -1, t
 	NHmax = numpy.array([10.])
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	assert (t > 0).all(), t
 	assert numpy.isclose(t, NHmax), (t, NHmax)
 	
@@ -277,7 +277,7 @@ def test_inhomogeneous_single():
 	a, b, c = numpy.array([-0.321689]), numpy.array([-0.901964]), numpy.array([-0.288056])
 	print('direction:', a**2 + b**2 + c**2)
 	NHmax = numpy.array([(10 + 1 + 1) * 3**0.5])
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	print('distance:', t)
 	assert (t == -1).all(), t
 
@@ -290,37 +290,37 @@ def test_density_coord():
 	b = numpy.array([0., 1., 0., 0., -1., 0.])
 	c = numpy.array([0., 0., 1., 0., 0., -1.])
 	NHmax = numpy.array([3.]*6)
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	t_expect = numpy.array([-1,-1,3., -1,-1,-1])
 	assert numpy.allclose(t, t_expect), (t, t_expect)
 
 	rho = numpy.zeros((256, 256, 256))
 	rho[128,128:140,128] = 1
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	t_expect = numpy.array([-1,3.,-1, -1,-1,-1])
 	assert numpy.allclose(t, t_expect), (t, t_expect)
 
 	rho = numpy.zeros((256, 256, 256))
 	rho[128:140,128,128] = 1
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	t_expect = numpy.array([3.,-1,-1, -1,-1,-1])
 	assert numpy.allclose(t, t_expect), (t, t_expect)
 
 	rho = numpy.zeros((256, 256, 256))
 	rho[128,128,120:129] = 1
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	t_expect = numpy.array([-1,-1,-1, -1,-1,3.])
 	assert numpy.allclose(t, t_expect), (t, t_expect)
 	
 	rho = numpy.zeros((256, 256, 256))
 	rho[128,120:129,128] = 1
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	t_expect = numpy.array([-1,-1,-1, -1,3.,-1])
 	assert numpy.allclose(t, t_expect), (t, t_expect)
 
 	rho = numpy.zeros((256, 256, 256))
 	rho[120:129,128,128] = 1
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	t_expect = numpy.array([-1,-1,-1, 3.,-1,-1])
 	assert numpy.allclose(t, t_expect), (t, t_expect)
 
@@ -338,7 +338,7 @@ def test_inhomogeneous():
 	a, b, c = numpy.array(a), numpy.array(b), numpy.array(c)
 	# call raytrace_grid_finite_c()
 	NHmax = 4.99 + numpy.zeros((N))
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	print('distance:', t)
 	assert numpy.allclose(t, 0.499), t
 	
@@ -346,7 +346,7 @@ def test_inhomogeneous():
 	rho[124:132,124:132,124:132] = 1
 	rho[128,128,128] = 10
 	NHmax = 5.99 + numpy.zeros((N))
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	print('distance:', t)
 	assert (t <= 1.499).all(), t
 	assert (t >= 0.599).all(), t
@@ -357,7 +357,7 @@ def test_inhomogeneous():
 	rho[128,128,128] = 10
 	NHmax = (10 + 1 + 1) * 3**0.5 + numpy.zeros((N))
 	#NHmax = 400 + numpy.zeros((20))
-	t = grid_raytrace_finite(numpy.array(rho.flatten()), x, y, z, a, b, c, NHmax)
+	t = grid_raytrace_finite(rho, x, y, z, a, b, c, NHmax)
 	print('distance:', t)
 	assert (t == -1).all(), t
 	

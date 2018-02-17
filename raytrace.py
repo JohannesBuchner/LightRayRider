@@ -111,6 +111,30 @@ lib.grid_raytrace.argtypes = [
 	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
 	]
 
+def grid_raytrace_flat(rho_flat, lenrho, x, y, z, a, b, c):
+	"""
+	ray tracing on a grid
+	
+	Parameters regarding the spheres:
+	rho:    double array: density for conversion from length to column density
+	 * n:      length of rho
+	x:      double array: start vector
+	y:      double array: start vector
+	z:      double array: start vector
+	a:      double array: direction vector
+	b:      double array: direction vector
+	c:      double array: direction vector
+	 * m:      length of a, b, c, x, y, z
+	NHout   double array: output; of size m
+	"""
+	
+	lena = len(a)
+	NHout = numpy.zeros(shape=lena) - 1
+	r = lib.grid_raytrace(rho_flat, lenrho, x, y, z, a, b, c, lena, NHout)
+	if r != 0:
+		raise Exception("Calculation failed")
+	return NHout
+
 def grid_raytrace(rho, x, y, z, a, b, c):
 	"""
 	ray tracing on a grid
@@ -129,14 +153,8 @@ def grid_raytrace(rho, x, y, z, a, b, c):
 	"""
 	
 	lenrho = len(rho)
-	#rho_flat = numpy.array(rho.flatten())
-	lena = len(a)
-	NHout = numpy.zeros(shape=lena) - 1
-	args = [rho, lenrho, x, y, z, a, b, c, lena, NHout]
-	r = lib.grid_raytrace(*args)
-	if r != 0:
-		raise Exception("Calculation failed")
-	return NHout
+	rho_flat = numpy.array(rho.flatten())
+	return grid_raytrace_flat(rho_flat, lenrho, x, y, z, a, b, c)
 
 
 lib.voronoi_raytrace.argtypes = [
@@ -364,6 +382,39 @@ lib.grid_raytrace_finite.argtypes = [
 	ndpointer(dtype=numpy.float64, ndim=1, flags='C_CONTIGUOUS'), 
 	]
 
+def grid_raytrace_finite_flat(rho_flat, lenrho, x, y, z, a, b, c, d):
+	"""
+	ray tracing on a grid
+	
+	Parameters regarding the spheres:
+	rho:    double array: density for conversion from length to column density
+	lenrho: length of rho
+	x:      double array: start vector
+	y:      double array: start vector
+	z:      double array: start vector
+	a:      double array: direction vector
+	b:      double array: direction vector
+	c:      double array: direction vector
+	 * m:      length of a, b, c, x, y, z
+	NHmax   double array: stop at this NH
+	
+	Returns:
+	t       double array: end position along direction vector. -1 if infinite
+	"""
+	
+	lena = len(a)
+	assert len(b) == lena
+	assert len(c) == lena
+	assert len(x) == lena
+	assert len(y) == lena
+	assert len(z) == lena
+	assert len(d) == lena
+	t = numpy.zeros(shape=lena)
+	r = lib.grid_raytrace_finite(rho_flat, lenrho, x, y, z, a, b, c, lena, d, t)
+	if r != 0:
+		raise Exception("Calculation failed")
+	return t
+
 def grid_raytrace_finite(rho, x, y, z, a, b, c, d):
 	"""
 	ray tracing on a grid
@@ -385,19 +436,7 @@ def grid_raytrace_finite(rho, x, y, z, a, b, c, d):
 	"""
 	
 	lenrho = len(rho)
-	#rho_flat = numpy.array(rho.flatten())
-	lena = len(a)
-	assert len(b) == lena
-	assert len(c) == lena
-	assert len(x) == lena
-	assert len(y) == lena
-	assert len(z) == lena
-	assert len(d) == lena
-	t = numpy.zeros(shape=lena)
-	args = [rho, lenrho, x, y, z, a, b, c, lena, d, t]
-	r = lib.grid_raytrace_finite(*args)
-	if r != 0:
-		raise Exception("Calculation failed")
-	return t
+	rho_flat = numpy.array(rho.flatten())
+	return grid_raytrace_finite_flat(rho_flat, lenrho, x, y, z, a, b, c, d)
 
 
