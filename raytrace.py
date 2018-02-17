@@ -129,10 +129,10 @@ def grid_raytrace(rho, x, y, z, a, b, c):
 	"""
 	
 	lenrho = len(rho)
-	rho_flat = numpy.array(rho.flatten())
+	#rho_flat = numpy.array(rho.flatten())
 	lena = len(a)
 	NHout = numpy.zeros(shape=lena) - 1
-	r = lib.grid_raytrace(rho_flat, lenrho, x, y, z, a, b, c, lena, NHout)
+	r = lib.grid_raytrace(rho, lenrho, x, y, z, a, b, c, lena, NHout)
 	if r != 0:
 		raise Exception("Calculation failed")
 	return NHout
@@ -384,7 +384,7 @@ def grid_raytrace_finite(rho, x, y, z, a, b, c, d):
 	"""
 	
 	lenrho = len(rho)
-	rho_flat = numpy.array(rho.flatten())
+	#rho_flat = numpy.array(rho.flatten())
 	lena = len(a)
 	assert len(b) == lena
 	assert len(c) == lena
@@ -393,7 +393,7 @@ def grid_raytrace_finite(rho, x, y, z, a, b, c, d):
 	assert len(z) == lena
 	assert len(d) == lena
 	t = numpy.zeros(shape=lena)
-	r = lib.grid_raytrace_finite(rho_flat, lenrho, x, y, z, a, b, c, lena, d, t)
+	r = lib.grid_raytrace_finite(rho, lenrho, x, y, z, a, b, c, lena, d, t)
 	if r != 0:
 		raise Exception("Calculation failed")
 	return t
