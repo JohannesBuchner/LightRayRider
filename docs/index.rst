@@ -1,5 +1,5 @@
 Welcome to LightRayRider's documentation!
-======================================
+==========================================
 
 .. toctree::
    :maxdepth: 1

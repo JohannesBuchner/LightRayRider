@@ -77,7 +77,7 @@ release = lightrayrider.__version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -123,7 +123,6 @@ html_theme = "sphinx_rtd_theme"
 # documentation.
 #
 html_theme_options = {
-    'canonical_url': 'https://johannesbuchner.github.io/lightrayrider/',
     'style_external_links': True,
     # 'vcs_pageview_mode': 'edit',
     'style_nav_header_background': '#2980B9',
@@ -132,6 +131,7 @@ html_theme_options = {
 html_logo = "static/logo.png"
 html_show_sourcelink = False
 html_show_sphinx = False
+html_baseurl = 'https://johannesbuchner.github.io/lightrayrider/'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

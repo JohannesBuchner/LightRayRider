@@ -13,7 +13,7 @@ See `Contributing <contributing.rst>`_ for how to report bugs and ask questions.
 
 
 How should I cite LightRayRider?
-------------------------------
+--------------------------------
 
 Please cite Buchner & Bauer (2017), http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B
 
