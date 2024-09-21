@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lightrayrider package &mdash; LightRayRider 2.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="canonical" href="https://johannesbuchner.github.io/lightrayrider/lightrayrider.html" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=664ffad9"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            LightRayRider
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2.0.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">LightRayRider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">lightrayrider package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lightrayrider.parallel">lightrayrider.parallel module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_cone_raytrace_finite"><code class="docutils literal notranslate"><span class="pre">py_cone_raytrace_finite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_grid_raytrace"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_grid_raytrace_finite"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace_finite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_grid_raytrace_finite_flat"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace_finite_flat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_grid_raytrace_flat"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace_flat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_sphere_raytrace"><code class="docutils literal notranslate"><span class="pre">py_sphere_raytrace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_sphere_raytrace_count_between"><code class="docutils literal notranslate"><span class="pre">py_sphere_raytrace_count_between()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_sphere_raytrace_finite"><code class="docutils literal notranslate"><span class="pre">py_sphere_raytrace_finite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_sphere_sphere_collisions"><code class="docutils literal notranslate"><span class="pre">py_sphere_sphere_collisions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.parallel.py_voronoi_raytrace"><code class="docutils literal notranslate"><span class="pre">py_voronoi_raytrace()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lightrayrider.raytrace">lightrayrider.raytrace module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_cone_raytrace_finite"><code class="docutils literal notranslate"><span class="pre">py_cone_raytrace_finite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_grid_raytrace"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_grid_raytrace_finite"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace_finite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_grid_raytrace_finite_flat"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace_finite_flat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_grid_raytrace_flat"><code class="docutils literal notranslate"><span class="pre">py_grid_raytrace_flat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_sphere_raytrace"><code class="docutils literal notranslate"><span class="pre">py_sphere_raytrace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_sphere_raytrace_count_between"><code class="docutils literal notranslate"><span class="pre">py_sphere_raytrace_count_between()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_sphere_raytrace_finite"><code class="docutils literal notranslate"><span class="pre">py_sphere_raytrace_finite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_sphere_sphere_collisions"><code class="docutils literal notranslate"><span class="pre">py_sphere_sphere_collisions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightrayrider.raytrace.py_voronoi_raytrace"><code class="docutils literal notranslate"><span class="pre">py_voronoi_raytrace()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lightrayrider">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LightRayRider</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">API</a></li>
+      <li class="breadcrumb-item active">lightrayrider package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lightrayrider-package">
+<h1>lightrayrider package<a class="headerlink" href="#lightrayrider-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-lightrayrider.parallel">
+<span id="lightrayrider-parallel-module"></span><h2>lightrayrider.parallel module<a class="headerlink" href="#module-lightrayrider.parallel" title="Link to this heading"></a></h2>
+<p>This file is part of LightRayRider, a fast column density computation tool.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_cone_raytrace_finite">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_cone_raytrace_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thetas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_cone_raytrace_finite" title="Link to this definition"></a></dt>
+<dd><p>Perform ray tracing through a sphere/cone cuts.</p>
+<p>Sphere radius is 1, each cone angle defines a region of a certain density.</p>
+<p>This function raytraces from the starting coordinates in the direction
+given and compute the column density of the intersecting segments.
+Then it will go along the ray in the positive direction until the
+column density d is reached. The coordinates of that point are stored into
+(x, y, z).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cones</strong> (<em>regarding the</em>)</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>thetas: array</dt><dd><p>the opening angles of the cones</p>
+</dd>
+<dt>rhos: array</dt><dd><p>density of the cones. For conversion from length to column density.</p>
+</dd>
+<dt>x: array</dt><dd><p>ray start coordinate, x component</p>
+</dd>
+<dt>y: array</dt><dd><p>ray start coordinate, y component</p>
+</dd>
+<dt>z: array</dt><dd><p>ray start coordinate, z component</p>
+</dd>
+<dt>a: array</dt><dd><p>ray direction, x component</p>
+</dd>
+<dt>b: array</dt><dd><p>ray direction, y component</p>
+</dd>
+<dt>c: array</dt><dd><p>ray direction, z component</p>
+</dd>
+<dt>d: array</dt><dd><p>column density where the ray should terminate.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_grid_raytrace">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_grid_raytrace" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>array</em>) – 3D cube of densities (in units of 1e22/cm^2). For conversion from length to column density.
+Must be same size in each axis.</p></li>
+<li><p><strong>lenrho</strong> (<em>int</em>) – length of rho.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is len(a).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_grid_raytrace_finite">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NHmax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_grid_raytrace_finite" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>array</em>) – 3D cube of densities (in units of 1e22/cm^2). For conversion from length to column density.
+Must be same size in each axis.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>NHmax</strong> (<em>array</em>) – column density where the ray should terminate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_grid_raytrace_finite_flat">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace_finite_flat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_flat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenrho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NHmax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_grid_raytrace_finite_flat" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_flat</strong> (<em>array</em>) – flattened 3D cube of densities. For conversion from length to column density.</p></li>
+<li><p><strong>lenrho</strong> (<em>int</em>) – length of each 3D cube axis</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>NHmax</strong> (<em>array</em>) – column density where the ray should terminate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_grid_raytrace_flat">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace_flat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_flat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenrho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_grid_raytrace_flat" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_flat</strong> (<em>array</em>) – flattened 3D cube of densities. For conversion from length to column density.</p></li>
+<li><p><strong>lenrho</strong> (<em>int</em>) – length of the original rho cube in each axis.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is len(a).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_sphere_raytrace">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_sphere_raytrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mindistances</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_sphere_raytrace" title="Link to this definition"></a></dt>
+<dd><p>Perform ray tracing using sphere intersections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>rho</strong> (<em>array</em>) – sphere densities (in units of 1e22/cm^2). For conversion from length to column density.</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>mindistances</strong> (<em>array</em>) – distance from the origin for each subtotal to consider.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is (len(mindistances), len(a)).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_sphere_raytrace_count_between">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_sphere_raytrace_count_between</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_sphere_raytrace_count_between" title="Link to this definition"></a></dt>
+<dd><p>Count number of spheres lying (partially or completely) between point a,b,c and origin.</p>
+<p>Stops counting at 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>n</strong> – number of spheres</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_sphere_raytrace_finite">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_sphere_raytrace_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NHmax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_sphere_raytrace_finite" title="Link to this definition"></a></dt>
+<dd><p>Perform ray tracing using sphere intersections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>rho</strong> (<em>array</em>) – sphere densities (in units of 1e22/cm^2). For conversion from length to column density.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>NHmax</strong> (<em>array</em>) – column density where the ray should terminate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_sphere_sphere_collisions">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_sphere_sphere_collisions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstop</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_sphere_sphere_collisions" title="Link to this definition"></a></dt>
+<dd><p>Marks the first kstop non-intersecting spheres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of spheres desired</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>NHout</strong> (<em>array</em>) – 1 if collides with another sphere of lower index,
+2 if okay.</p></li>
+<li><p><em>Parameters regarding the spheres</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.parallel.py_voronoi_raytrace">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.parallel.</span></span><span class="sig-name descname"><span class="pre">py_voronoi_raytrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mindistances</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.parallel.py_voronoi_raytrace" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing using nearest point density.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – radii</p></li>
+<li><p><strong>rho</strong> (<em>array</em>) – sphere densities. For conversion from length to column density.</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>mindistances</strong> (<em>array</em>) – distance from the origin for each subtotal to consider.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is (len(mindistances), len(a)).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-lightrayrider.raytrace">
+<span id="lightrayrider-raytrace-module"></span><h2>lightrayrider.raytrace module<a class="headerlink" href="#module-lightrayrider.raytrace" title="Link to this heading"></a></h2>
+<p>This file is part of LightRayRider, a fast column density computation tool.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_cone_raytrace_finite">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_cone_raytrace_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thetas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_cone_raytrace_finite" title="Link to this definition"></a></dt>
+<dd><p>Perform ray tracing through a sphere/cone cuts.</p>
+<p>Sphere radius is 1, each cone angle defines a region of a certain density.</p>
+<p>This function raytraces from the starting coordinates in the direction
+given and compute the column density of the intersecting segments.
+Then it will go along the ray in the positive direction until the
+column density d is reached. The coordinates of that point are stored into
+(x, y, z).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cones</strong> (<em>regarding the</em>)</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>thetas: array</dt><dd><p>the opening angles of the cones</p>
+</dd>
+<dt>rhos: array</dt><dd><p>density of the cones. For conversion from length to column density.</p>
+</dd>
+<dt>x: array</dt><dd><p>ray start coordinate, x component</p>
+</dd>
+<dt>y: array</dt><dd><p>ray start coordinate, y component</p>
+</dd>
+<dt>z: array</dt><dd><p>ray start coordinate, z component</p>
+</dd>
+<dt>a: array</dt><dd><p>ray direction, x component</p>
+</dd>
+<dt>b: array</dt><dd><p>ray direction, y component</p>
+</dd>
+<dt>c: array</dt><dd><p>ray direction, z component</p>
+</dd>
+<dt>d: array</dt><dd><p>column density where the ray should terminate.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_grid_raytrace">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_grid_raytrace" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>array</em>) – 3D cube of densities (in units of 1e22/cm^2). For conversion from length to column density.
+Must be same size in each axis.</p></li>
+<li><p><strong>lenrho</strong> (<em>int</em>) – length of rho.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is len(a).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_grid_raytrace_finite">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NHmax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_grid_raytrace_finite" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>array</em>) – 3D cube of densities (in units of 1e22/cm^2). For conversion from length to column density.
+Must be same size in each axis.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>NHmax</strong> (<em>array</em>) – column density where the ray should terminate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_grid_raytrace_finite_flat">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace_finite_flat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_flat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenrho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NHmax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_grid_raytrace_finite_flat" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_flat</strong> (<em>array</em>) – flattened 3D cube of densities. For conversion from length to column density.</p></li>
+<li><p><strong>lenrho</strong> (<em>int</em>) – length of each 3D cube axis</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>NHmax</strong> (<em>array</em>) – column density where the ray should terminate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_grid_raytrace_flat">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_grid_raytrace_flat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_flat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenrho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_grid_raytrace_flat" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing on a grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_flat</strong> (<em>array</em>) – flattened 3D cube of densities. For conversion from length to column density.</p></li>
+<li><p><strong>lenrho</strong> (<em>int</em>) – length of the original rho cube in each axis.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is len(a).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_sphere_raytrace">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_sphere_raytrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mindistances</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_sphere_raytrace" title="Link to this definition"></a></dt>
+<dd><p>Perform ray tracing using sphere intersections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>rho</strong> (<em>array</em>) – sphere densities (in units of 1e22/cm^2). For conversion from length to column density.</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>mindistances</strong> (<em>array</em>) – distance from the origin for each subtotal to consider.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is (len(mindistances), len(a)).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_sphere_raytrace_count_between">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_sphere_raytrace_count_between</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_sphere_raytrace_count_between" title="Link to this definition"></a></dt>
+<dd><p>Count number of spheres lying (partially or completely) between point a,b,c and origin.</p>
+<p>Stops counting at 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>n</strong> – number of spheres</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_sphere_raytrace_finite">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_sphere_raytrace_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NHmax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_sphere_raytrace_finite" title="Link to this definition"></a></dt>
+<dd><p>Perform ray tracing using sphere intersections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>rho</strong> (<em>array</em>) – sphere densities (in units of 1e22/cm^2). For conversion from length to column density.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) – ray start coordinate, x component</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – ray start coordinate, y component</p></li>
+<li><p><strong>z</strong> (<em>array</em>) – ray start coordinate, z component</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>NHmax</strong> (<em>array</em>) – column density where the ray should terminate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>t</strong> – end position in multiples of the direction vector. -1 if infinite.
+Of shape len(x).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_sphere_sphere_collisions">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_sphere_sphere_collisions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstop</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_sphere_sphere_collisions" title="Link to this definition"></a></dt>
+<dd><p>Marks the first kstop non-intersecting spheres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – sphere x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – sphere y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – sphere z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – sphere radii</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of spheres desired</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>NHout</strong> (<em>array</em>) – 1 if collides with another sphere of lower index,
+2 if okay.</p></li>
+<li><p><em>Parameters regarding the spheres</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lightrayrider.raytrace.py_voronoi_raytrace">
+<span class="sig-prename descclassname"><span class="pre">lightrayrider.raytrace.</span></span><span class="sig-name descname"><span class="pre">py_voronoi_raytrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mindistances</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lightrayrider.raytrace.py_voronoi_raytrace" title="Link to this definition"></a></dt>
+<dd><p>Ray tracing using nearest point density.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xx</strong> (<em>array</em>) – x coordinates</p></li>
+<li><p><strong>yy</strong> (<em>array</em>) – y coordinates</p></li>
+<li><p><strong>zz</strong> (<em>array</em>) – z coordinates</p></li>
+<li><p><strong>RR</strong> (<em>array</em>) – radii</p></li>
+<li><p><strong>rho</strong> (<em>array</em>) – sphere densities. For conversion from length to column density.</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – ray direction, x component</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – ray direction, y component</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – ray direction, z component</p></li>
+<li><p><strong>mindistances</strong> (<em>array</em>) – distance from the origin for each subtotal to consider.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NHout</strong> – column density from the origin to infinity. shape is (len(mindistances), len(a)).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-lightrayrider">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lightrayrider" title="Link to this heading"></a></h2>
+<p>LightRayRider is a tiny fast library to compute column densities along a ray.</p>
+<p>Supported geometries:</p>
+<ul class="simple">
+<li><p>Uniform density grids.</p></li>
+<li><p>Spheres of varying size, density and position.</p></li>
+<li><p>Co-centred cones of varying opening angles and density.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2024, Johannes Buchner.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
