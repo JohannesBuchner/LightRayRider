@@ -1,29 +1,35 @@
-import os.path
+import numpy
+from setuptools import Extension
+from Cython.Build import cythonize
+#from distutils.extension import Extension
+#from Cython.Distutils import build_ext
+#from setuptools.command.build_py import build_py as _build_py
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
-long_description = ""
-with open('README.rst') as f:
-    long_description = f.read()
+with open('README.rst', encoding="utf-8") as readme_file:
+    readme = readme_file.read()
+
+compile_args = ['-std=c99', '-lm', '-Wall', '-Wextra', '-Wno-unused-function', '-DNPY_NO_DEPRECATED_API']
 
 setup(
-    name='LightRayRider',
-    version='1.0',
     author='Johannes Buchner',
-    author_email='buchner.johannes@gmx.at',
-    py_modules=['raytrace'],
-    data_files=[('','ray.so'), ('','ray-parallel.so')],
-    url='https://github.com/JohannesBuchner/imagehash',
-    license='BSD 2-clause (see LICENSE file)',
-    description='Ray Tracing Monte Carlo photon cropagator and column density calculator',
-    long_description=long_description,
-    install_requires=[
-        "numpy",
-        "scipy",       # for phash
-    ],
-    setup_requires=['pytest-runner'],
-    tests_require=['pytest'],
+    packages=['lightrayrider'],
+    ext_modules = cythonize([
+        Extension(
+            "lightrayrider.parallel",
+            ["lightrayrider/parallel.pyx"],
+            include_dirs=[numpy.get_include()],
+            extra_compile_args=compile_args + ["-fopenmp", "-DPARALLEL=1"],
+            extra_link_args=compile_args + ["-fopenmp", "-DPARALLEL=1"],
+        ),
+        Extension(
+            "lightrayrider.raytrace",
+            ["lightrayrider/raytrace.pyx"],
+            include_dirs=[numpy.get_include()],
+            extra_compile_args=compile_args,
+            extra_link_args=compile_args,
+        )
+    ]),
+    long_description=readme,
 )

@@ -1,7 +1,6 @@
-from __future__ import print_function, division
 import numpy
 from numpy import pi, sin, cos, arccos, tan
-import raytrace
+import lightrayrider as raytrace
 
 def cone_raytrace_finite_coords(thetas, rhos, x, y, z, a, b, c, d):
 	t = raytrace.cone_raytrace_finite(thetas, rhos, x, y, z, a, b, c, d)

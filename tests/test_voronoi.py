@@ -1,9 +1,7 @@
-from __future__ import print_function, division
+import os
 import numpy
 import scipy.interpolate
-from raytrace import voronoi_raytrace
-#from matplotlib import pyplot as plt
-#import test_line as line
+from lightrayrider import voronoi_raytrace
 
 def montecarlo(x, y, z, R, rho, a, b, c, mindistances):
 	r = (x**2 + y**2 + z**2)**0.5
@@ -27,7 +25,7 @@ def montecarlo(x, y, z, R, rho, a, b, c, mindistances):
 	return numpy.array(NH)
 
 def test():
-	data_orig = numpy.load('ray_example.npz')
+	data_orig = numpy.load(os.path.join(os.path.dirname(__file__), 'ray_example.npz'))
 	data = dict([(k, data_orig[k].astype(numpy.float64)) for k in data_orig.keys()])
 	x = data['x']
 	y = data['y']

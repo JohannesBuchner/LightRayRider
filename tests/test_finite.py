@@ -1,6 +1,5 @@
-from __future__ import print_function, division
 import numpy
-import raytrace
+import lightrayrider as raytrace
 
 def to_cartesian(pos):
 	(rad, theta, phi) = pos

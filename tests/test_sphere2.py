@@ -1,8 +1,6 @@
-from __future__ import print_function, division
 import numpy
-from ctypes import *
-from numpy.ctypeslib import ndpointer
-from raytrace import sphere_raytrace
+import os
+from lightrayrider import sphere_raytrace
 
 def rootterm(a, b, c, x, y, z, R):
 	return (R**2*a**2 + R**2*b**2 + R**2*c**2 - a**2*y**2 - a**2*z**2 + 2*a*b*x*y + 2*a*c*x*z - b**2*x**2 - b**2*z**2 + 2*b*c*y*z - c**2*x**2 - c**2*y**2)
@@ -85,26 +83,31 @@ def nh_dist(x, y, z, R, density, mindistances=[0], ):
 
 
 def test():
-	numpy.random.seed(1)
-	N = 10000
-	x = numpy.random.normal(size=N)
-	y = numpy.random.normal(size=N)
-	z = numpy.random.normal(size=N)
-	RR = numpy.random.normal(1, 0.1, size=N)
-	rho = 10**numpy.random.normal(20, 0.1, size=N)
+	data_orig = numpy.load(os.path.join(os.path.dirname(__file__), 'ray_example.npz'))
+	data = dict([(k, data_orig[k].astype(numpy.float64)) for k in data_orig.keys()])
+	x = data['x']
+	y = data['y']
+	z = data['z']
+	R = data['R']
+	rho = data['conversion'][:,0]
 	
-	nsamples = 40
-	vall = numpy.random.normal(size=(nsamples, 3))
-	vall /= ((vall**2).sum(axis=1)**0.5).reshape((-1, 1)) # normalize
+	vall = data['v'] #[:1,:]
 	
 	a, b, c = numpy.copy(vall[:,0]), numpy.copy(vall[:,1]), numpy.copy(vall[:,2])
-	mindistances = numpy.array([0.0]) #, 0.1, 1])
+	mindistances = numpy.copy(data['mindistances'])
 	
-	for i in range(10):
+	for i in range(1):
 		print('running...')
-		result = sphere_raytrace(x, y, z, RR, rho, a, b, c, mindistances)
+		result = sphere_raytrace(x, y, z, R, rho, a, b, c, mindistances)
 	print('done.')
 	print(result)
+	assert result.shape == data['NHtotal'].shape, (result.shape, data['NHtotal'].shape)
+	print('result:', numpy.log10(result))
+	print('reference:', numpy.log10(data['NHtotal']))
+	print('absdiff:', numpy.max(numpy.abs(result - data['NHtotal'])))
+	print('reldiff:', numpy.max(numpy.abs((result - data['NHtotal'])/data['NHtotal'])))
+	assert numpy.allclose(result, data['NHtotal'], rtol=0.0001, atol=1e19)
+	
 
 if __name__ == '__main__':
 	test()

@@ -21,8 +21,6 @@ See README and LICENSE file.
 #define M_PI_2         1.57079632679489661923  /* pi/2 */
 #define IFVERBOSE if(0)
 #define IFDEBUG if(0)
-#define adouble double
-#define bdouble double
 #define sqr(x) (pow(x,2))
 
 /**
@@ -93,13 +91,13 @@ struct segment {
  * NHout   double array: output; of size n * l
  * 
  */
-int sphere_raytrace(
-	const void * xxp, const void * yyp, const void * zzp, const void * RRp, const void * rhop, int n, 
-	const void * ap, const void * bp, const void * cp, int m, 
-	const void * mindistancesp, int l, const void * NHoutp
+static int sphere_raytrace(
+	const double * xxp, const double * yyp, const double * zzp, const double * RRp, const double * rhop, int n, 
+	const double * ap, const double * bp, const double * cp, int m, 
+	const double * mindistancesp, int l, const double * NHoutp
 ) {
-	const adouble * mindistances = (adouble*) mindistancesp;
-	bdouble * NHout = (bdouble*) NHoutp;
+	const double * mindistances = (double*) mindistancesp;
+	double * NHout = (double*) NHoutp;
 	
 	// could use openmp here
 	// but actually does not pay off because it is already extremely fast
@@ -109,9 +107,9 @@ int sphere_raytrace(
 	for (int i = 0; i < m; i++) { // one ray at a time
 		// fprintf(stderr, "ray %d/%d\r", i, m);
 		
-		const adouble a = ((adouble*) ap)[i];
-		const adouble b = ((adouble*) bp)[i];
-		const adouble c = ((adouble*) cp)[i];
+		const double a = ((double*) ap)[i];
+		const double b = ((double*) bp)[i];
+		const double c = ((double*) cp)[i];
 		
 		double NHtotal[l];
 		for (int k = 0; k < l; k++) {
@@ -119,11 +117,11 @@ int sphere_raytrace(
 		}
 		
 		for (int j = 0; j < n; j++) { // one sphere at a time
-			const adouble xx = ((adouble*) xxp)[j];
-			const adouble yy = ((adouble*) yyp)[j];
-			const adouble zz = ((adouble*) zzp)[j];
-			const adouble RR = ((adouble*) RRp)[j];
-			const adouble rho = ((adouble*) rhop)[j];
+			const double xx = ((double*) xxp)[j];
+			const double yy = ((double*) yyp)[j];
+			const double zz = ((double*) zzp)[j];
+			const double RR = ((double*) RRp)[j];
+			const double rho = ((double*) rhop)[j];
 			double root = compute_rootterm(a, b, c, xx, yy, zz, RR);
 			if (root >= 0) { // actual cut
 				double rootsqrt = sqrt(root);
@@ -173,12 +171,12 @@ int sphere_raytrace(
  * NHout   double array: output; of size n * l
  * 
  */
-int sphere_raytrace_count_between(
-	const void * xxp, const void * yyp, const void * zzp, const void * RRp, int n, 
-	const void * ap, const void * bp, const void * cp, int m, 
-	const void * NHoutp
+static int sphere_raytrace_count_between(
+	const double * xxp, const double * yyp, const double * zzp, const double * RRp, int n, 
+	const double * ap, const double * bp, const double * cp, int m, 
+	const double * NHoutp
 ) {
-	bdouble * NHout = (bdouble*) NHoutp;
+	double * NHout = (double*) NHoutp;
 	
 	// could use openmp here
 	// but actually does not pay off because it is already extremely fast
@@ -190,18 +188,18 @@ int sphere_raytrace_count_between(
 		if (i % 100 == 0) fprintf(stderr, "ray %d/%d\r", i, m);
 		#endif
 		
-		const adouble a = ((adouble*) ap)[i];
-		const adouble b = ((adouble*) bp)[i];
-		const adouble c = ((adouble*) cp)[i];
+		const double a = ((double*) ap)[i];
+		const double b = ((double*) bp)[i];
+		const double c = ((double*) cp)[i];
 		
 		double NHtotal = 0.0;
 		
 		for (int j = 0; j < n; j++) { // one sphere at a time
-			const adouble xx = ((adouble*) xxp)[j];
-			const adouble yy = ((adouble*) yyp)[j];
-			const adouble zz = ((adouble*) zzp)[j];
-			const adouble RR = ((adouble*) RRp)[j];
-			//const adouble rho = ((adouble*) rhop)[j];
+			const double xx = ((double*) xxp)[j];
+			const double yy = ((double*) yyp)[j];
+			const double zz = ((double*) zzp)[j];
+			const double RR = ((double*) RRp)[j];
+			//const double rho = ((double*) rhop)[j];
 			double root = compute_rootterm(a, b, c, xx, yy, zz, RR);
 			if (root >= 0) { // actual cut
 				double rootsqrt = sqrt(root);
@@ -373,25 +371,25 @@ static int cmp_double(const void * p1, const void *p2) {
  * Output:
  * t       double array: end position along direction vector
  */
-int sphere_raytrace_finite(
-	const void * xxp, const void * yyp, const void * zzp, const void * RRp, const void * rhop, int n, 
-	const void * xp, const void * yp, const void * zp, const void * ap, const void * bp, const void * cp, int m, 
-	const void * NHmaxp, const void * tp
+static int sphere_raytrace_finite(
+	const double * xxp, const double * yyp, const double * zzp, const double * RRp, const double * rhop, int n, 
+	const double * xp, const double * yp, const double * zp, const double * ap, const double * bp, const double * cp, int m, 
+	const double * NHmaxp, const double * tp
 ) {
-	bdouble * NHmax = (bdouble*) NHmaxp;
-	bdouble * rho = (bdouble*) rhop;
-	bdouble * t = (bdouble*) tp;
+	double * NHmax = (double*) NHmaxp;
+	double * rho = (double*) rhop;
+	double * t = (double*) tp;
 	
 	#ifdef PARALLEL
 	#pragma omp parallel for
 	#endif
 	for (int i = 0; i < m; i++) { // one ray at a time
-		const adouble a = ((adouble*) ap)[i];
-		const adouble b = ((adouble*) bp)[i];
-		const adouble c = ((adouble*) cp)[i];
-		const adouble x = ((adouble*) xp)[i];
-		const adouble y = ((adouble*) yp)[i];
-		const adouble z = ((adouble*) zp)[i];
+		const double a = ((double*) ap)[i];
+		const double b = ((double*) bp)[i];
+		const double c = ((double*) cp)[i];
+		const double x = ((double*) xp)[i];
+		const double y = ((double*) yp)[i];
+		const double z = ((double*) zp)[i];
 		
 		// collect spheres into segmentation
 		
@@ -403,10 +401,10 @@ int sphere_raytrace_finite(
 		
 		// for each sphere we should compute tmin, tmax of cut
 		for (int j = 0; j < n; j++) { // one sphere at a time
-			const adouble xx = ((adouble*) xxp)[j] - x;
-			const adouble yy = ((adouble*) yyp)[j] - y;
-			const adouble zz = ((adouble*) zzp)[j] - z;
-			const adouble RR = ((adouble*) RRp)[j];
+			const double xx = ((double*) xxp)[j] - x;
+			const double yy = ((double*) yyp)[j] - y;
+			const double zz = ((double*) zzp)[j] - z;
+			const double RR = ((double*) RRp)[j];
 			double root = compute_rootterm(a, b, c, xx, yy, zz, RR);
 			if (root >= 0) { // actual cut
 				double rootsqrt = sqrt(root);
@@ -482,31 +480,31 @@ int sphere_raytrace_finite(
  * Output:
  * t       double array: end position along direction vector
  */
-int grid_raytrace_finite(
-	const void * rhop, int n, 
-	const void * xp, const void * yp, const void * zp, const void * ap, const void * bp, const void * cp, int m, 
-	const void * NHmaxp, const void * tp
+static int grid_raytrace_finite(
+	const double * rhop, int n, 
+	const double * xp, const double * yp, const double * zp, const double * ap, const double * bp, const double * cp, int m, 
+	const double * NHmaxp, const double * tp
 ) {
-	bdouble * NHmax = (bdouble*) NHmaxp;
-	bdouble * rhoarr = (bdouble*) rhop;
-	bdouble * tout = (bdouble*) tp;
+	double * NHmax = (double*) NHmaxp;
+	double * rhoarr = (double*) rhop;
+	double * tout = (double*) tp;
 	
 	#ifdef PARALLEL
 	#pragma omp parallel for
 	#endif
 	for (int i = 0; i < m; i++) { // one ray at a time
-		const adouble dx = ((adouble*) ap)[i];
-		const adouble dy = ((adouble*) bp)[i];
-		const adouble dz = ((adouble*) cp)[i];
-		const adouble x0 = ((adouble*) xp)[i];
-		const adouble y0 = ((adouble*) yp)[i];
-		const adouble z0 = ((adouble*) zp)[i];
+		const double dx = ((double*) ap)[i];
+		const double dy = ((double*) bp)[i];
+		const double dz = ((double*) cp)[i];
+		const double x0 = ((double*) xp)[i];
+		const double y0 = ((double*) yp)[i];
+		const double z0 = ((double*) zp)[i];
 		
 		double d = NHmax[i];
 		
-		const adouble dt_dx = 1. / dx;
-		const adouble dt_dy = 1. / dy;
-		const adouble dt_dz = 1. / dz;
+		const double dt_dx = 1. / dx;
+		const double dt_dy = 1. / dy;
+		const double dt_dz = 1. / dz;
 		
 		int x = x0;
 		int y = y0;
@@ -626,28 +624,28 @@ int grid_raytrace_finite(
  * Output:
  * NHout   double array: NH integrated to infinity
  */
-int grid_raytrace(
-	const void * rhop, int n, 
-	const void * xp, const void * yp, const void * zp, const void * ap, const void * bp, const void * cp, int m, 
-	const void * NHoutp
+static int grid_raytrace(
+	const double * rhop, int n, 
+	const double * xp, const double * yp, const double * zp, const double * ap, const double * bp, const double * cp, int m, 
+	const double * NHoutp
 ) {
-	bdouble * rhoarr = (bdouble*) rhop;
-	bdouble * NHout = (bdouble*) NHoutp;
+	double * rhoarr = (double*) rhop;
+	double * NHout = (double*) NHoutp;
 	
 	#ifdef PARALLEL
 	#pragma omp parallel for
 	#endif
 	for (int i = 0; i < m; i++) { // one ray at a time
-		const adouble dx = ((adouble*) ap)[i];
-		const adouble dy = ((adouble*) bp)[i];
-		const adouble dz = ((adouble*) cp)[i];
-		const adouble x0 = ((adouble*) xp)[i];
-		const adouble y0 = ((adouble*) yp)[i];
-		const adouble z0 = ((adouble*) zp)[i];
+		const double dx = ((double*) ap)[i];
+		const double dy = ((double*) bp)[i];
+		const double dz = ((double*) cp)[i];
+		const double x0 = ((double*) xp)[i];
+		const double y0 = ((double*) yp)[i];
+		const double z0 = ((double*) zp)[i];
 		
-		const adouble dt_dx = 1. / dx;
-		const adouble dt_dy = 1. / dy;
-		const adouble dt_dz = 1. / dz;
+		const double dt_dx = 1. / dx;
+		const double dt_dy = 1. / dy;
+		const double dt_dz = 1. / dz;
 		
 		int x = x0;
 		int y = y0;
@@ -842,7 +840,7 @@ int build_frontier(const struct linedistance * distances, const int n, int * ind
 struct segmentation segments_create(
 	const double a, const double b, const double c, 
 	const double x, const double y, const double z, 
-	const adouble * xx, const adouble * yy, const adouble * zz, const adouble * RR, const int n
+	const double * xx, const double * yy, const double * zz, const double * RR, const int n
 	) {
 	int * indices = (int*) calloc(n+1, sizeof(int));
 	struct linedistance * distances = (struct linedistance *) calloc(n+1, sizeof(struct linedistance));
@@ -964,7 +962,7 @@ struct segmentation segments_create(
 struct segmentation cone_segments_create(
 	const double a, const double b, const double c, 
 	const double x, const double y, const double z, 
-	const adouble * thetas, const int n
+	const double * thetas, const int n
 	) {
 	// rdir should be 1, but... you never know
 	double rdir = sqrt(pow(a, 2) + pow(b, 2) + pow(c, 2));
@@ -1216,13 +1214,13 @@ struct segmentation cone_segments_create(
  * int l   length of mindistances
  * NHout   double array: output; of size n * l
  */
-int voronoi_raytrace(
-	const void * xxp, const void * yyp, const void * zzp, const void * RRp, const void * rhop, int n, 
-	const void * ap, const void * bp, const void * cp, int m, 
-	const void * mindistancesp, int l, const void * NHoutp
+static int voronoi_raytrace(
+	const double * xxp, const double * yyp, const double * zzp, const double * RRp, const double * rhop, int n, 
+	const double * ap, const double * bp, const double * cp, int m, 
+	const double * mindistancesp, int l, const double * NHoutp
 ) {
-	const adouble * mindistances = (adouble*) mindistancesp;
-	bdouble * NHout = (bdouble*) NHoutp;
+	const double * mindistances = (double*) mindistancesp;
+	double * NHout = (double*) NHoutp;
 	
 	#ifdef PARALLEL
 	#pragma omp parallel for
@@ -1231,20 +1229,20 @@ int voronoi_raytrace(
 		IFDEBUG fprintf(stderr, "ray %d/%d\n", i, m);
 		fprintf(stderr, "ray %d/%d through %d    \r", i, m, n);
 		
-		const adouble a = ((adouble*) ap)[i];
-		const adouble b = ((adouble*) bp)[i];
-		const adouble c = ((adouble*) cp)[i];
+		const double a = ((double*) ap)[i];
+		const double b = ((double*) bp)[i];
+		const double c = ((double*) cp)[i];
 		
 		
 		double NHtotal[l];
 		for (int k = 0; k < l; k++) {
 			NHtotal[k] = 0.0;
 		}
-		const adouble * xx = ((adouble*) xxp);
-		const adouble * yy = ((adouble*) yyp);
-		const adouble * zz = ((adouble*) zzp);
-		const adouble * RR = ((adouble*) RRp);
-		const adouble * rho = ((adouble*) rhop);
+		const double * xx = ((double*) xxp);
+		const double * yy = ((double*) yyp);
+		const double * zz = ((double*) zzp);
+		const double * RR = ((double*) RRp);
+		const double * rho = ((double*) rhop);
 		IFVERBOSE fprintf(stderr, "  segmenting...\n");
 		struct segmentation s = segments_create(a, b, c, 0, 0, 0,
 			xx, yy, zz, RR, n);
@@ -1312,10 +1310,10 @@ int voronoi_raytrace(
  * z:      double array: coordinate vector
  * m:      length of a, b, c, x, y, z
  */
-int voronoi_raytrace_finite(
-	const void * xxp, const void * yyp, const void * zzp, const void * RRp, const void * rhop, int n, 
-	const void * ap, const void * bp, const void * cp, const void * dp, 
-	const void * xp, const void * yp, const void * zp, int m
+static int voronoi_raytrace_finite(
+	const double * xxp, const double * yyp, const double * zzp, const double * RRp, const double * rhop, int n, 
+	const double * ap, const double * bp, const double * cp, const double * dp, 
+	const double * xp, const double * yp, const double * zp, int m
 ) {
 	#ifdef PARALLEL
 	#pragma omp parallel for
@@ -1324,20 +1322,20 @@ int voronoi_raytrace_finite(
 		IFDEBUG fprintf(stderr, "ray %d/%d\n", i, m);
 		fprintf(stderr, "ray %d/%d through %d    \r", i, m, n);
 		
-		const adouble a = ((adouble*) ap)[i];
-		const adouble b = ((adouble*) bp)[i];
-		const adouble c = ((adouble*) cp)[i];
-		const adouble d = ((adouble*) dp)[i];
+		const double a = ((double*) ap)[i];
+		const double b = ((double*) bp)[i];
+		const double c = ((double*) cp)[i];
+		const double d = ((double*) dp)[i];
 
-		const adouble x = ((adouble*) xp)[i];
-		const adouble y = ((adouble*) yp)[i];
-		const adouble z = ((adouble*) zp)[i];
+		const double x = ((double*) xp)[i];
+		const double y = ((double*) yp)[i];
+		const double z = ((double*) zp)[i];
 		
-		const adouble * xx = ((adouble*) xxp);
-		const adouble * yy = ((adouble*) yyp);
-		const adouble * zz = ((adouble*) zzp);
-		const adouble * RR = ((adouble*) RRp);
-		const adouble * rho = ((adouble*) rhop);
+		const double * xx = ((double*) xxp);
+		const double * yy = ((double*) yyp);
+		const double * zz = ((double*) zzp);
+		const double * RR = ((double*) RRp);
+		const double * rho = ((double*) rhop);
 		IFVERBOSE fprintf(stderr, "  segmenting...\n");
 		struct segmentation s = segments_create(a, b, c, x, y, z,
 			xx, yy, zz, RR, n);
@@ -1375,9 +1373,9 @@ int voronoi_raytrace_finite(
 			t = 1e10;
 		}
 		// lets figure out the corresponding coordinates
-		((adouble * )xp)[i] = x + a*t;
-		((adouble * )yp)[i] = y + b*t;
-		((adouble * )zp)[i] = z + c*t;
+		((double * )xp)[i] = x + a*t;
+		((double * )yp)[i] = y + b*t;
+		((double * )zp)[i] = z + c*t;
 	}
 	return 0;
 }
@@ -1410,14 +1408,14 @@ int voronoi_raytrace_finite(
  * Output:
  * t       double array: end position along direction vector. -1 if infinite
  */
-int cone_raytrace_finite(
-	const void * thetasp, const void * rhosp, int n, 
-	void * xp, void * yp, void * zp, 
-	const void * ap, const void * bp, const void * cp, int m,
-	const void * dp, const void * tp
+static int cone_raytrace_finite(
+	const double * thetasp, const double * rhosp, int n, 
+	double * xp, double * yp, double * zp, 
+	const double * ap, const double * bp, const double * cp, int m,
+	const double * dp, const double * tp
 ) {
-	const adouble * thetas = (adouble*) thetasp;
-	const bdouble * rhos = (bdouble*) rhosp;
+	const double * thetas = (double*) thetasp;
+	const double * rhos = (double*) rhosp;
 	
 	#ifdef PARALLEL
 	#pragma omp parallel for
@@ -1426,15 +1424,15 @@ int cone_raytrace_finite(
 		IFDEBUG fprintf(stderr, "ray %d/%d\n", i, m);
 		//fprintf(stderr, "ray %d/%d through %d    \r", i, m, n);
 		
-		const adouble a = ((adouble*) ap)[i];
-		const adouble b = ((adouble*) bp)[i];
-		const adouble c = ((adouble*) cp)[i];
+		const double a = ((double*) ap)[i];
+		const double b = ((double*) bp)[i];
+		const double c = ((double*) cp)[i];
 		
-		const adouble x = ((adouble*) xp)[i];
-		const adouble y = ((adouble*) yp)[i];
-		const adouble z = ((adouble*) zp)[i];
+		const double x = ((double*) xp)[i];
+		const double y = ((double*) yp)[i];
+		const double z = ((double*) zp)[i];
 
-		const adouble d = ((adouble*) dp)[i];
+		const double d = ((double*) dp)[i];
 		
 		IFVERBOSE fprintf(stderr, "  segmenting...\n");
 		struct segmentation s = cone_segments_create(a, b, c, 
@@ -1470,7 +1468,7 @@ int cone_raytrace_finite(
 		}
 		free(s.segments);
 		IFDEBUG fprintf(stderr, "  ended up at t=%.3f\n", t);
-		((adouble*) tp)[i] = t;
+		((double*) tp)[i] = t;
 	}
 	return 0;
 }
@@ -1489,17 +1487,17 @@ int cone_raytrace_finite(
  * NHout   double array: output; of size n
  * 
  */
-int sphere_sphere_collisions(
-	const void * xxp, const void * yyp, const void * zzp, const void * RRp, int n, int kstop, 
-	const void * NHoutp
+static int sphere_sphere_collisions(
+	const double * xxp, const double * yyp, const double * zzp, const double * RRp, int n, int kstop, 
+	const double * NHoutp
 ) {
-	bdouble * NHout = (bdouble*) NHoutp;
+	double * NHout = (double*) NHoutp;
 	int i = 0;
 	for (; i < n; i++) { // one sphere at a time
-		const adouble a = ((adouble*) xxp)[i];
-		const adouble b = ((adouble*) yyp)[i];
-		const adouble c = ((adouble*) zzp)[i];
-		const adouble R = ((adouble*) RRp)[i];
+		const double a = ((double*) xxp)[i];
+		const double b = ((double*) yyp)[i];
+		const double c = ((double*) zzp)[i];
+		const double R = ((double*) RRp)[i];
 		int collides = 0;
 		
 		#ifdef PARALLEL
@@ -1510,11 +1508,11 @@ int sphere_sphere_collisions(
 				// only look at those not already marked bad
 				continue;
 			}
-			const adouble xx = ((adouble*) xxp)[j];
-			const adouble yy = ((adouble*) yyp)[j];
-			const adouble zz = ((adouble*) zzp)[j];
-			const adouble RR = ((adouble*) RRp)[j];
-			const adouble dist = pow(pow(a - xx, 2) + pow(b - yy, 2) + pow(c - zz, 2), 0.5);
+			const double xx = ((double*) xxp)[j];
+			const double yy = ((double*) yyp)[j];
+			const double zz = ((double*) zzp)[j];
+			const double RR = ((double*) RRp)[j];
+			const double dist = pow(pow(a - xx, 2) + pow(b - yy, 2) + pow(c - zz, 2), 0.5);
 			if (dist < RR + R) {
 				collides = 1; // mark bad
 			}

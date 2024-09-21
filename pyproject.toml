@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "cython", "oldest-supported-numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lightrayrider"
+version = "2.0"
+description = "Ray Tracing Monte Carlo photon propagator and column density calculator"
+readme = "README.rst"
+authors = [
+    { name="Johannes Buchner", email="buchner.johannes@gmx.at" }
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "numpy",
+    "scipy"
+]
+
+[project.urls]
+Repository = "https://github.com/JohannesBuchner/LightRayRider"
+Homepage = "https://github.com/JohannesBuchner/LightRayRider"
+
+#[tool.setuptools]
+##include-package-data = true
+## py-modules = ["LightRayRider"]
+##py-modules = ["_custom_build"]
+
+##[tool.setuptools.cmdclass]
+##build_py = "_custom_build.build_py"
+

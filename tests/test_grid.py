@@ -1,7 +1,7 @@
-from __future__ import print_function, division
 import numpy
 from math import floor, ceil
-from raytrace import grid_raytrace_finite
+from lightrayrider import grid_raytrace_finite
+
 def raytrace_grid_finite(x, v, d):
 	(x0, y0, z0), (dx, dy, dz) = x, v
 	# call raytrace_grid_finite_c()
