@@ -44,7 +44,7 @@ jobs:
       run: python3 -m coverage run example/geometricnh.py
 
     - name: Build locally
-      run:  python -m pip uninstall lightrayrider && python3 setup.py build_ext --inplace
+      run:  python -m pip uninstall lightrayrider numpy && python3 setup.py build_ext --inplace
 
     - name: Test with pytest
       run: python3 -m coverage run -a -m pytest
