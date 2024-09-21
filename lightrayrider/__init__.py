@@ -1,8 +1,20 @@
+"""
+LightRayRider is a tiny fast library to compute column densities along a ray.
+
+Supported geometries:
+
+* Uniform density grids.
+* Spheres of varying size, density and position.
+* Co-centred cones of varying opening angles and density.
+"""
 import os
-print("""
+
+print(
+    """
 You are using the LightRayRider library, which provides optimized calls for
 photon propagation and column density computations.
-Please cite: Buchner & Bauer (2017), http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B""")
+Please cite: Buchner & Bauer (2017), """
+    "http://adsabs.harvard.edu/abs/2017MNRAS.465.4348B")
 
 if int(os.environ.get('OMP_NUM_THREADS', '1')) > 1:
     from . import parallel as raytrace

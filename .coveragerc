@@ -4,20 +4,12 @@
 
 [run]
 branch = True
-omit =
-    test*
+include = 
+        lightrayrider/*
 
 
 [report]
 exclude_lines =
     pragma: no cover
     def __repr__
-    if __name__ == .__main__.
-omit =
-    .eggs/*
-    /home/travis/.local/lib/*
-    test*.py
-    setup.py
-    __init__.py
-    
-
+    if __name__ == .__main__.:
