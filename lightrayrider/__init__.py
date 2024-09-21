@@ -9,6 +9,8 @@ Supported geometries:
 """
 import os
 
+__version__ = '2.0.0'
+
 print(
     """
 You are using the LightRayRider library, which provides optimized calls for
