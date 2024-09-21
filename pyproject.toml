@@ -17,19 +17,10 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "numpy",
-    "scipy"
+    "numpy"
 ]
 
 [project.urls]
 Repository = "https://github.com/JohannesBuchner/LightRayRider"
 Homepage = "https://github.com/JohannesBuchner/LightRayRider"
-
-#[tool.setuptools]
-##include-package-data = true
-## py-modules = ["LightRayRider"]
-##py-modules = ["_custom_build"]
-
-##[tool.setuptools.cmdclass]
-##build_py = "_custom_build.build_py"
 
