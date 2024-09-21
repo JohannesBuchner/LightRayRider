@@ -6,20 +6,26 @@ A fast library for calculating intersections of a line with many spheres or inho
 Introduction
 -------------
 
-.. image:: logo.png
+.. image:: https://johannesbuchner.github.io/LightRayRider/_static/logo.png
 
-Technically speaking, the library performs three-dimensional line integrals 
-through various geometric bodies, such as millions of spheres of various sizes, 
-three-dimensional uniform grids, and arbitrary density fields approximated by their 
-point densities and voronoi tesselation.
+This small library computes line integrals through various three-dimensional geometric bodies.
+For example, millions of rays can be sent through millions of spheres of various sizes and densities.
+Three-dimensional uniform grids representing arbitrary density fields are also supported,
+as well as voronoi tesselation of points.
 
-In astrophysics, a point source can be obscured by a gas distribution along the line-of-sight.
+The library was developed for X-ray ray tracing with `XARS <https://github.com/JohannesBuchner/xars/>`.
+A point source can be obscured by a gas distribution along the line-of-sight.
 For hydrodynamic simulations which produce such a gas distribution, this code can compute
 the total density along a arbitrary ray. The output is a column density, 
-also known as N_H if hydrogen gas is irradiated.
+also known as "N_H" if hydrogen gas is irradiated.
 
-.. image:: https://travis-ci.org/JohannesBuchner/LightRayRider.svg?branch=master
-	:target: https://travis-ci.org/JohannesBuchner/LightRayRider
+.. image:: https://img.shields.io/pypi/v/lightrayrider.svg
+        :target: https://pypi.python.org/pypi/lightrayrider
+.. image:: https://img.shields.io/badge/docs-published-ok.svg
+        :target: https://johannesbuchner.github.io/LightRayRider/
+        :alt: Documentation Status
+.. image:: https://github.com/JohannesBuchner/LightRayRider/actions/workflows/tests.yml/badge.svg
+	:target: https://github.com/JohannesBuchner/LightRayRider/actions
 .. image:: https://coveralls.io/repos/github/JohannesBuchner/LightRayRider/badge.svg?branch=master
 	:target: https://coveralls.io/github/JohannesBuchner/LightRayRider?branch=master
 
@@ -85,16 +91,14 @@ Method:
 Usage
 --------------
 
-Compile the c library first with::
-
-	$ make 
-
 To use from Python, use raytrace.py::
 	
-	from raytrace import *
+	from lightrayrider import *
 
-You can find the declaration of how to call these functions in raytrace.py.
-Basically, you pass the coordinates of your gas particles, the associated
+You can find the declaration of how to call these functions on the 
+**`API documentation page <https://johannesbuchner.github.io/LightRayRider/modules.html>`**.
+
+Essentially, pass the coordinates of your objects, the associated
 densities and the starting point and direction of your raytracing.
 
 Example usage is demonstrated in irradiate.py. This was used for Illustris and 
