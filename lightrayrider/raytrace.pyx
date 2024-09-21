@@ -198,11 +198,53 @@ def py_grid_raytrace(
     NHout: array
         column density from the origin to infinity. shape is len(a).
     """
-    cdef const double[::1] rho_flat = np.array(rho.flatten())
-    cdef int lena = len(a)
     cdef int lenrho = rho.shape[0]
     assert lenrho == rho.shape[1]
     assert lenrho == rho.shape[2]
+    cdef const double[::1] rho_flat = np.array(rho.flatten())
+    return py_grid_raytrace_flat(np.array(rho.flatten()), lenrho, x, y, z, a, b, c)
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def py_grid_raytrace_flat(
+    double[::1] rho_flat,
+    int lenrho,
+    double[::1] x,
+    double[::1] y,
+    double[::1] z,
+    double[::1] a,
+    double[::1] b,
+    double[::1] c
+):
+    """
+    Ray tracing on a grid.
+
+    Parameters
+    ----------
+    rho_flat: array
+        flattened 3D cube of densities. For conversion from length to column density.
+    lenrho: int
+        length of the original rho cube in each axis.
+    x: array
+        ray start coordinate, x component
+    y: array
+        ray start coordinate, y component
+    z: array
+        ray start coordinate, z component
+    a: array
+        ray direction, x component
+    b: array
+        ray direction, y component
+    c: array
+        ray direction, z component
+
+    Returns
+    -------
+    NHout: array
+        column density from the origin to infinity. shape is len(a).
+    """
+    cdef int lena = len(a)
     cdef cnp.ndarray[double, ndim=1] NHout = np.zeros(lena) - 1
     cdef int r = grid_raytrace(
         &rho_flat[0], lenrho, &x[0], &y[0], &z[0], &a[0], &b[0], &c[0], lena, &NHout[0])
@@ -499,7 +541,52 @@ def py_grid_raytrace_finite(
     cdef int lenrho = rho.shape[0]
     assert lenrho == rho.shape[1]
     assert lenrho == rho.shape[2]
-    cdef const double[::1] rho_flat = np.array(rho.flatten())
+    return py_grid_raytrace_finite_flat(np.array(rho.flatten()), lenrho, x, y, z, a, b, c, NHmax)
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def py_grid_raytrace_finite_flat(
+    double[::1] rho_flat,
+    int lenrho,
+    double[::1] x,
+    double[::1] y,
+    double[::1] z,
+    double[::1] a,
+    double[::1] b,
+    double[::1] c,
+    double[::1] NHmax,
+):
+    """
+    Ray tracing on a grid.
+
+    Parameters
+    ----------
+    rho_flat: array
+        flattened 3D cube of densities. For conversion from length to column density.
+    lenrho: int
+        length of each 3D cube axis
+    x: array
+        ray start coordinate, x component
+    y: array
+        ray start coordinate, y component
+    z: array
+        ray start coordinate, z component
+    a: array
+        ray direction, x component
+    b: array
+        ray direction, y component
+    c: array
+        ray direction, z component
+    NHmax: array
+        column density where the ray should terminate.
+
+    Returns
+    ----------
+    t: array
+        end position in multiples of the direction vector. -1 if infinite.
+        Of shape len(x).
+    """
+    cdef int lena = len(a)
     assert len(b) == lena
     assert len(c) == lena
     assert len(x) == lena
