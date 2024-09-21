@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LightRayRider &mdash; LightRayRider 2.0.1 documentation</title>
+  <title>LightRayRider &mdash; LightRayRider 2.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=f5cff4aa"></script>
+        <script src="_static/documentation_options.js?v=664ffad9"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -40,7 +40,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                2.0.1
+                2.0.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -96,16 +96,19 @@
 <p>A fast library for calculating intersections of a line with many spheres or inhomogeneous material.</p>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
-<img alt="_images/logo.png" src="_images/logo.png" />
-<p>Technically speaking, the library performs three-dimensional line integrals
-through various geometric bodies, such as millions of spheres of various sizes,
-three-dimensional uniform grids, and arbitrary density fields approximated by their
-point densities and voronoi tesselation.</p>
-<p>In astrophysics, a point source can be obscured by a gas distribution along the line-of-sight.
+<img alt="https://johannesbuchner.github.io/LightRayRider/_static/logo.png" src="https://johannesbuchner.github.io/LightRayRider/_static/logo.png" />
+<p>This small library computes line integrals through various three-dimensional geometric bodies.
+For example, millions of rays can be sent through millions of spheres of various sizes and densities.
+Three-dimensional uniform grids representing arbitrary density fields are also supported,
+as well as voronoi tesselation of points.</p>
+<p>The library was developed for X-ray ray tracing with <cite>XARS &lt;https://github.com/JohannesBuchner/xars/&gt;</cite>.
+A point source can be obscured by a gas distribution along the line-of-sight.
 For hydrodynamic simulations which produce such a gas distribution, this code can compute
 the total density along a arbitrary ray. The output is a column density,
-also known as N_H if hydrogen gas is irradiated.</p>
-<a class="reference external image-reference" href="https://travis-ci.org/JohannesBuchner/LightRayRider"><img alt="https://travis-ci.org/JohannesBuchner/LightRayRider.svg?branch=master" src="https://travis-ci.org/JohannesBuchner/LightRayRider.svg?branch=master" /></a>
+also known as “N_H” if hydrogen gas is irradiated.</p>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/lightrayrider"><img alt="https://img.shields.io/pypi/v/lightrayrider.svg" src="https://img.shields.io/pypi/v/lightrayrider.svg" /></a>
+<a class="reference external image-reference" href="https://johannesbuchner.github.io/LightRayRider/"><img alt="Documentation Status" src="https://img.shields.io/badge/docs-published-ok.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/JohannesBuchner/LightRayRider/actions"><img alt="https://github.com/JohannesBuchner/LightRayRider/actions/workflows/tests.yml/badge.svg" src="https://github.com/JohannesBuchner/LightRayRider/actions/workflows/tests.yml/badge.svg" /></a>
 <a class="reference external image-reference" href="https://coveralls.io/github/JohannesBuchner/LightRayRider?branch=master"><img alt="https://coveralls.io/repos/github/JohannesBuchner/LightRayRider/badge.svg?branch=master" src="https://coveralls.io/repos/github/JohannesBuchner/LightRayRider/badge.svg?branch=master" /></a>
 </section>
 <section id="line-sphere-cutting">
@@ -169,16 +172,13 @@ checking which cell to consider next.</p></li>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<p>Compile the c library first with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make
-</pre></div>
-</div>
 <p>To use from Python, use raytrace.py:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">raytrace</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lightrayrider</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
-<p>You can find the declaration of how to call these functions in raytrace.py.
-Basically, you pass the coordinates of your gas particles, the associated
+<p>You can find the declaration of how to call these functions on the
+<strong>`API documentation page &lt;https://johannesbuchner.github.io/LightRayRider/modules.html&gt;`</strong>.</p>
+<p>Essentially, pass the coordinates of your objects, the associated
 densities and the starting point and direction of your raytracing.</p>
 <p>Example usage is demonstrated in irradiate.py. This was used for Illustris and
 EAGLE particle in the associated paper.
