@@ -1,3 +1,4 @@
 exclude lightrayrider/raytrace.pyx.py
+include lightrayrider/ray.c
 include README.rst
 include LICENSE

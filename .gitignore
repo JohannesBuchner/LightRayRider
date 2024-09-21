@@ -8,5 +8,4 @@ lightrayrider.egg-info
 old
 lightrayrider/parallel.c
 lightrayrider/raytrace.c
-#*.npz
-#*.txt
+docs/lightrayrider.rst
