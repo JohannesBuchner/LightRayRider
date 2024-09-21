@@ -28,8 +28,10 @@ else:
 sphere_raytrace = raytrace.py_sphere_raytrace
 sphere_raytrace_count_between = raytrace.py_sphere_raytrace_count_between
 grid_raytrace = raytrace.py_grid_raytrace
+grid_raytrace_flat = raytrace.py_grid_raytrace_flat
 voronoi_raytrace = raytrace.py_voronoi_raytrace
 sphere_sphere_collisions = raytrace.py_sphere_sphere_collisions
 sphere_raytrace_finite = raytrace.py_sphere_raytrace_finite
 cone_raytrace_finite = raytrace.py_cone_raytrace_finite
 grid_raytrace_finite = raytrace.py_grid_raytrace_finite
+grid_raytrace_finite_flat = raytrace.py_grid_raytrace_finite_flat

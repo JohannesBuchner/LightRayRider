@@ -15,9 +15,17 @@ requires-python = ">=3.8"
 classifiers = [
     "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Development Status :: 6 - Mature",
 ]
 dependencies = [
-    "numpy"
+    "numpy<2",
+    "progressbar-latest",
+    "matplotlib",
+    "scipy",
 ]
 
 [project.urls]
