@@ -543,6 +543,7 @@ def py_grid_raytrace_finite(
     assert lenrho == rho.shape[2]
     return py_grid_raytrace_finite_flat(np.array(rho.flatten()), lenrho, x, y, z, a, b, c, NHmax)
 
+
 @cython.boundscheck(False)
 @cython.wraparound(False)
 def py_grid_raytrace_finite_flat(
