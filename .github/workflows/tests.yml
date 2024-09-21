@@ -43,9 +43,8 @@ jobs:
     
     - name: Test package
       run: python3 -m coverage run example/geometricnh.py
-      with:
-        env:
-          OMP_NUM_THREADS: ${{ matrix.parallel }}
+      env:
+        OMP_NUM_THREADS: ${{ matrix.parallel }}
 
     - name: Build locally
       run: python3 setup.py build_ext --inplace
