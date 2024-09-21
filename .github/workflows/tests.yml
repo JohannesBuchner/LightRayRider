@@ -43,9 +43,6 @@ jobs:
     - name: Check doc style
       run: pydocstyle lightrayrider/*.py lightrayrider/*.pyx
     
-    - name: clean up here
-      run: rm -rf lightrayrider
-
     - name: Test package
       run: python3 -m coverage run example/geometricnh.py
 
