@@ -24,12 +24,12 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    
+    - name: Install test dependencies
+      run: python -m pip install matplotlib "numpy<2" cython setuptools scipy flake8 pycodestyle pydocstyle pytest coverage 'coverage_lcov[extras] @ git+https://github.com/JohannesBuchner/coverage-lcov@feature-coverage7'
 
     - name: Install package
       run: python -m pip install .
-    
-    - name: Install test dependencies
-      run: python -m pip install matplotlib numpy cython setuptools scipy flake8 pycodestyle pydocstyle pytest coverage 'coverage_lcov[extras] @ git+https://github.com/JohannesBuchner/coverage-lcov@feature-coverage7'
 
     - name: Lint with flake8
       run: flake8 lightrayrider/*.py
@@ -44,7 +44,7 @@ jobs:
       run: python3 -m coverage run example/geometricnh.py
 
     - name: Build locally
-      run:  python -m pip uninstall lightrayrider numpy && python3 setup.py build_ext --inplace
+      run: python3 setup.py build_ext --inplace
 
     - name: Test with pytest
       run: python3 -m coverage run -a -m pytest
