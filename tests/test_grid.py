@@ -215,7 +215,7 @@ def test_diagonal():
 	assert numpy.allclose(z1, 0), (z1, 0)
 
 def test_random():
-	rng = np.random.RandomState(412)
+	rng = numpy.random.RandomState(412)
 	for i in range(400):
 		x0 = rng.normal(0, 3, size=3)
 		dv = rng.normal(size=3)
