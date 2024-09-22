@@ -215,16 +215,17 @@ def test_diagonal():
 	assert numpy.allclose(z1, 0), (z1, 0)
 
 def test_random():
-	for i in range(40):
-		x0 = numpy.random.normal(0, 3, size=3)
-		dv = numpy.random.normal(size=3)
+	rng = np.random.RandomState(412)
+	for i in range(400):
+		x0 = rng.normal(0, 3, size=3)
+		dv = rng.normal(size=3)
 		dv /= (dv**2).sum()
-		d = numpy.random.normal(0, 3)**2
+		d = rng.normal(0, 3)**2
 		# expected
 		final = x0 + dv * d
 		print(x0, dv, d, '--> expect:', final)
 		x1 = raytrace_grid_finite(x0, dv, d)
-		assert numpy.allclose(final, x1), (final, x1)
+		assert numpy.allclose(final, x1), (final, x1, x0, dv, d)
 
 def test_random_single():
 	x, y, z = numpy.array([125.275611]), numpy.array([127.322529]), numpy.array([128.700102])
