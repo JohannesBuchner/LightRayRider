@@ -221,7 +221,7 @@ def test_random():
 		dv = rng.normal(size=3)
 		dv /= (dv**2).sum()
 		d = rng.normal(0, 3)**2
-		# expected
+		# expected value:
 		final = x0 + dv * d
 		print(x0, dv, d, '--> expect:', final)
 		x1 = raytrace_grid_finite(x0, dv, d)
