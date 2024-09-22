@@ -1,4 +1,5 @@
 exclude lightrayrider/raytrace.pyx.py
+exclude tests/ray_example.npz
 include lightrayrider/ray.c
 include README.rst
 include LICENSE
@@ -11,6 +12,7 @@ include pip-requirements.txt
 
 recursive-include * *.pyx
 recursive-include * *.pxd
+recursive-include * .coverage
 
 recursive-include tests *
 recursive-exclude * __pycache__
