@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "wheel", "cython", "oldest-supported-numpy"]
+requires = ["setuptools>=42", "wheel", "cython", "numpy"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -10,7 +10,7 @@ readme = "README.rst"
 authors = [
     { name="Johannes Buchner", email="buchner.johannes@gmx.at" }
 ]
-license = "BSD"
+license = "AGPL-3.0-or-later"
 license-files = ["LICENSE"]
 requires-python = ">=3.8"
 classifiers = [
