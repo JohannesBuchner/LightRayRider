@@ -20,7 +20,8 @@ def montecarlo(x, y, z, R, rho, a, b, c, mindistances):
 	#	print('  %.3e %.3f' % (rhoi, ti))
 	#plt.plot(ti, rhoi, '-')
 	#print rho.max(), rho.min()
-	NH = [numpy.trapezoid(x=t, y=densities[t >= mindistance]) for mindistance in mindistances]
+	trapezoid = getattr(numpy, 'trapezoid', None) or getattr(numpy, 'trapz')
+	NH = [trapezoid(x=t, y=densities[t >= mindistance]) for mindistance in mindistances]
 	print('0...%.2e' % rmax, 'NH:', zip(mindistances, NH))
 	return numpy.array(NH)
 
