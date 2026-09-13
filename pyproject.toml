@@ -35,6 +35,7 @@ Homepage = "https://github.com/JohannesBuchner/LightRayRider"
 [flake8]
 exclude = "docs"
 extend-ignore = "E501,F401,E128,E231,E124"
+style = "numpy"
 
 [tool.pycodestyle]
 count = false
