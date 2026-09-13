@@ -47,10 +47,10 @@ jobs:
         OMP_NUM_THREADS: ${{ matrix.parallel }}
 
     - name: Build locally
-      run: python3 setup.py build_ext --inplace
+      run: make install
 
     - name: Test with pytest
-      run: python3 -m coverage run -a -m pytest
+      run: make coverage
 
     - name: Convert coverage output to lcov for coveralls
       run: |
