@@ -46,8 +46,11 @@ jobs:
       env:
         OMP_NUM_THREADS: ${{ matrix.parallel }}
 
-    - name: Build locally
+    - name: Install locally
       run: make install
+
+    - name: Build locally
+      run: make build
 
     - name: Test with pytest
       run: make coverage

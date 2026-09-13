@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help
+.PHONY: clean clean-test clean-pyc clean-build build test docs help
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -92,6 +92,9 @@ servedocs: docs ## compile the docs watching for changes
 
 release: dist ## package and upload a release
 	twine upload --verbose dist/*.tar.gz
+
+build: ## package and upload a release
+	$(PYTHON) setup.py build_ext --inplace
 
 dist: clean ## builds source and wheel package
 	$(PYTHON) setup.py sdist
