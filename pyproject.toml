@@ -32,10 +32,18 @@ dependencies = [
 Repository = "https://github.com/JohannesBuchner/LightRayRider"
 Homepage = "https://github.com/JohannesBuchner/LightRayRider"
 
-[flake8]
-exclude = "docs"
-extend-ignore = "E501,F401,E128,E231,E124"
-style = "numpy"
+[tool.bumpversion]
+current_version = "2.0.7"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[tool.pytest.ini_options]
+collect_ignore = ["setup.py"]
 
 [tool.pycodestyle]
 count = false
@@ -43,5 +51,6 @@ ignore = "W191,W291,W293,E231,E225"
 max-line-length = 160
 statistics = false
 
-[tool.pytest.ini_options]
-collect_ignore = "['setup.py']"
+[tool.flake8]
+exclude = ["docs"]
+extend-ignore = ["E501", "F401", "E128", "E231", "E124"]
