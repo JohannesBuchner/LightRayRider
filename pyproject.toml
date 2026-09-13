@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lightrayrider"
-version = "2.0.7"
+version = "2.0.8"
 description = "Ray Tracing Monte Carlo photon propagator and column density calculator"
 readme = "README.rst"
 authors = [
@@ -33,7 +33,7 @@ Repository = "https://github.com/JohannesBuchner/LightRayRider"
 Homepage = "https://github.com/JohannesBuchner/LightRayRider"
 
 [tool.bumpversion]
-current_version = "2.0.7"
+current_version = "2.0.8"
 commit = true
 tag = true
 
