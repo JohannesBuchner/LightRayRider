@@ -64,8 +64,8 @@ lint-fix: ## fix style with autopep8 and isort; ignores to not autofix tabs to s
 	autopep8 . --in-place --aggressive --aggressive --aggressive --recursive --ignore=W191,E101,E111,E122
 	isort .
 
-test: ## run tests quickly with the default Python
-	pytest
+test: build ## run tests quickly with the default Python
+	$(PYTHON) -m pytest
 
 test-all: ## run tests on every Python version with tox
 	tox
@@ -102,4 +102,4 @@ dist: clean ## builds source and wheel package
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
-	$(PYTHON) setup.py install --user
+	$(PYTHON) -m pip install .
