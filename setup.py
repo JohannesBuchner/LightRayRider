@@ -12,7 +12,7 @@ compile_args = ['-std=c99', '-lm', '-Wall', '-Wextra', '-Wno-unused-function', '
 setup(
     author='Johannes Buchner',
     packages=['lightrayrider'],
-    ext_modules = cythonize([
+    ext_modules=cythonize([
         Extension(
             "lightrayrider.parallel",
             ["lightrayrider/parallel.pyx"],
