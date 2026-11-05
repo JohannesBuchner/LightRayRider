@@ -67,7 +67,7 @@ lint-fix: ## fix style with autopep8 and isort; ignores to not autofix tabs to s
 	isort .
 
 test: ## run tests quickly with the default Python
-	pytest
+	$(PYTHON) -m pytest
 
 test-all: ## run tests on every Python version with tox
 	tox
